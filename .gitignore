@@ -1,0 +1,28 @@
+# Local credentials and secret configuration
+application-local.properties
+application-*.local.properties
+.env
+.env.*
+!.env.example
+
+# Build output and Java artifacts
+target/
+*.class
+
+# IDE and operating system files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Local logs and test/request captures
+*.log
+/cookies*.txt
+/*Headers.txt
+/*Body.html
+/cp.txt
+/VerifyHash.java
+/VerifyHash.class
+/*Cookies.txt
+/*cookies*.txt
