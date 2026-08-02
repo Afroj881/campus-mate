@@ -4,11 +4,15 @@ import com.campusmate.model.User;
 import com.campusmate.repository.UserRepository;
 import java.util.Locale;
 import java.util.Optional;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
  private final UserRepository userRepository;
  private final PasswordEncoder passwordEncoder;
  public UserService(UserRepository repo,PasswordEncoder encoder){userRepository=repo;passwordEncoder=encoder;}
@@ -24,6 +28,11 @@ public class UserService {
   if(email==null||password==null)return Optional.empty();
   return userRepository.findByEmailIgnoreCase(normalize(email)).filter(u->passwordEncoder.matches(password,u.getPassword()));
  }
- private String normalize(String email){return email.trim().toLowerCase(Locale.ROOT);}
+ @Override @Transactional(readOnly=true)
+ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+  User user=userRepository.findByEmailIgnoreCase(normalize(username)).orElseThrow(()->new UsernameNotFoundException("User not found"));
+  return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword())
+   .authorities(new SimpleGrantedAuthority("ROLE_"+user.getRole().name())).build();
+ } private String normalize(String email){return email.trim().toLowerCase(Locale.ROOT);}
  public static class DuplicateEmailException extends RuntimeException {}
 }

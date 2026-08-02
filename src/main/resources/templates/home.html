@@ -1,6 +1,2 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}">
-</head><body><main class="welcome"><p class="eyebrow">CAMPUS MATE</p>
-<h1 th:if="${userName == null}">A foundation for campus life</h1><h1 th:if="${userName != null}">Welcome, <span th:text="${userName}">Student</span></h1>
-<p>Student registration and account sign-in are available.</p><nav class="actions" th:if="${userName == null}"><a class="button" th:href="@{/register}">Create student account</a><a class="button secondary" th:href="@{/login}">Sign in</a></nav>
-<p class="status" th:if="${userName != null}">Signed in to Campus Mate</p></main></body></html>
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><main class="welcome"><p class="eyebrow">CAMPUS MATE</p><h1>Student community</h1><p>Register or sign in to enter the appropriate account area.</p><nav class="actions"><a class="button" th:href="@{/register}">Register</a><a class="button secondary" th:href="@{/login}">Sign in</a></nav><form th:action="@{/logout}" method="post"><button class="button secondary" type="submit">Log out</button></form></main></body></html>

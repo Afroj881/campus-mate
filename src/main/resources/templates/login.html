@@ -1,8 +1,5 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}">
-</head><body><main class="welcome form-card"><p class="eyebrow">STUDENT ACCOUNT</p><h1>Sign in</h1>
-<p class="success" th:if="${param.registered}">Registration complete. You can sign in.</p>
-<form th:action="@{/login}" method="post"><label>Email <input name="email" type="email" th:value="${loginEmail}" autocomplete="email" required></label>
-<label>Password <input name="password" type="password" autocomplete="current-password" required></label>
-<p class="error" role="alert" th:if="${loginError}" th:text="${loginError}"></p><button class="button" type="submit">Sign in</button></form>
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><main class="welcome form-card"><p class="eyebrow">CAMPUS MATE</p><h1>Sign in</h1>
+<p class="success" th:if="${param.registered}">Registration complete. You can sign in.</p><p class="error" role="alert" th:if="${param.error}">Email or password is incorrect.</p><p th:if="${param.logout}">You have been logged out.</p>
+<form th:action="@{/login}" method="post"><label>Email <input name="email" type="email" th:value="${param.email}" autocomplete="username" required></label><label>Password <input name="password" type="password" autocomplete="current-password" required></label><button class="button" type="submit">Sign in</button></form>
 <p><a th:href="@{/register}">Create a student account</a></p></main></body></html>

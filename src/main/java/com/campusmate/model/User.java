@@ -18,5 +18,5 @@ public class User {
  public Role getRole(){return role;} public void setRole(Role v){role=v;}
  public String getDepartment(){return department;} public void setDepartment(String v){department=v;}
  public Integer getSemester(){return semester;} public void setSemester(Integer v){semester=v;}
- public enum Role { STUDENT }
+ public enum Role { STUDENT, ADMIN }
 }
