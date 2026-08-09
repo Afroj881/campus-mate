@@ -33,6 +33,7 @@ public class UserService implements UserDetailsService {
   User user=userRepository.findByEmailIgnoreCase(normalize(username)).orElseThrow(()->new UsernameNotFoundException("User not found"));
   return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword())
    .authorities(new SimpleGrantedAuthority("ROLE_"+user.getRole().name())).build();
- } private String normalize(String email){return email.trim().toLowerCase(Locale.ROOT);}
+ } @Transactional(readOnly=true) public Optional<User> findByEmail(String email){if(email==null)return Optional.empty();return userRepository.findByEmailIgnoreCase(normalize(email));}
+ private String normalize(String email){return email.trim().toLowerCase(Locale.ROOT);}
  public static class DuplicateEmailException extends RuntimeException {}
 }
