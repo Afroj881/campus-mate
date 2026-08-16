@@ -10,3 +10,9 @@ h1 { margin:16px 0; font-size:clamp(2rem,6vw,3.5rem); } p { line-height:1.7; } .
 .profile-grid span { color:#62718a; font-size:.75rem; font-weight:700; letter-spacing:.1em; } footer { color:#66758c; border-top:1px solid #e4eaf2; padding-top:20px; }
 form { display:grid; gap:10px; margin-top:24px; } label { display:grid; gap:6px; font-weight:600; } input { width:100%; border:1px solid #cbd6e5; border-radius:8px; padding:11px 12px; font:inherit; }
 .error { color:#a4262c; } .success { color:#176b45; }
+.notice-list { display:grid; gap:16px; margin:32px 0; }
+.notice-card { padding:24px; border:1px solid #e1e8f1; border-radius:16px; background:#fbfcfe; }
+.notice-card h2 { margin:8px 0; } .notice-meta { color:#64748b; font-size:.9rem; }
+.empty-state { margin:32px 0; padding:24px; border-radius:14px; background:#f4f7fb; }
+textarea { width:100%; border:1px solid #cbd6e5; border-radius:8px; padding:11px 12px; font:inherit; resize:vertical; }
+.button.danger { background:#a4262c; } .success { color:#176b45; }

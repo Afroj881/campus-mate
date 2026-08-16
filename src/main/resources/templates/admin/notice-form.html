@@ -1,0 +1,8 @@
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title th:text="${pageHeading} + ' | Campus Mate'">Notice</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><main class="dashboard-card form-card"><p class="eyebrow">ADMIN / CAMPUS BULLETIN</p><h1 th:text="${pageHeading}">Notice</h1>
+<form th:action="${noticeAction}" th:object="${notice}" method="post">
+<label>Title<input th:field="*{title}" maxlength="180" required></label><small class="error" th:errors="*{title}"></small>
+<label>Category<input th:field="*{category}" maxlength="80" required></label><small class="error" th:errors="*{category}"></small>
+<label>Date<input th:field="*{date}" type="date" required></label><small class="error" th:errors="*{date}"></small>
+<label>Description<textarea th:field="*{description}" rows="6" required></textarea></label><small class="error" th:errors="*{description}"></small>
+<div class="actions"><button class="button" type="submit">Save Notice</button><a class="button secondary" th:href="@{/admin/notices}">Cancel</a></div></form></main></body></html>
