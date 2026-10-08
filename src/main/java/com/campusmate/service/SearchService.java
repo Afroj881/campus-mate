@@ -5,6 +5,7 @@ import com.campusmate.model.Event;
 import com.campusmate.model.Notice;
 import com.campusmate.model.Resource;
 import com.campusmate.model.SearchResult;
+import com.campusmate.model.User;
 import com.campusmate.repository.ClubRepository;
 import com.campusmate.repository.EventRepository;
 import com.campusmate.repository.NoticeRepository;
@@ -34,6 +35,14 @@ public class SearchService {
     }
 
     public List<SearchResult> search(String query) {
+        return search(query, null, true);
+    }
+
+    public List<SearchResult> search(String query, User viewer) {
+        return search(query, viewer, false);
+    }
+
+    private List<SearchResult> search(String query, User viewer, boolean includeUnscopedViewerResources) {
         if (query == null || query.isBlank()) {
             return List.of();
         }
@@ -64,12 +73,25 @@ public class SearchService {
                     coordinators, "/clubs", null));
         }
 
-        for (Resource resource : resourceRepository.searchUrlResources(searchTerm)) {
+        List<Resource> matchingResources = viewer == null
+                ? includeUnscopedViewerResources ? resourceRepository.searchUrlResources(searchTerm) : List.of()
+                : viewer.getRole() == User.Role.STUDENT
+                    ? hasCompleteClass(viewer)
+                        ? resourceRepository.searchUrlResourcesForClass(searchTerm, viewer.getDepartment(),
+                                viewer.getSemester(), viewer.getSection())
+                        : List.of()
+                    : resourceRepository.searchUrlResources(searchTerm);
+        for (Resource resource : matchingResources) {
             results.add(new SearchResult("Resource", resource.getTitle(), excerpt(resource.getDescription()),
                     resource.getSubject(), "/resources", resource.getUrl()));
         }
 
         return results;
+    }
+
+    private boolean hasCompleteClass(User viewer) {
+        return viewer.getDepartment() != null && !viewer.getDepartment().isBlank()
+                && viewer.getSemester() != null && viewer.getSemester() > 0;
     }
 
     private String excerpt(String description) {

@@ -32,4 +32,7 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
 
     @Query("select resource from Resource resource where resource.uploadedBy is null and (lower(resource.title) like lower(concat('%', :term, '%')) or lower(resource.subject) like lower(concat('%', :term, '%')) or lower(resource.description) like lower(concat('%', :term, '%'))) ")
     List<Resource> searchUrlResources(String term);
+
+    @Query("select resource from Resource resource where resource.uploadedBy is null and (resource.department is null or lower(trim(resource.department)) = lower(trim(:department))) and (resource.semester is null or resource.semester = :semester) and (resource.section is null or lower(trim(resource.section)) = lower(trim(:section))) and (lower(resource.title) like lower(concat('%', :term, '%')) or lower(resource.subject) like lower(concat('%', :term, '%')) or lower(resource.description) like lower(concat('%', :term, '%'))) ")
+    List<Resource> searchUrlResourcesForClass(String term, String department, Integer semester, String section);
 }

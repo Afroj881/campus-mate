@@ -123,6 +123,21 @@ class SearchIntegrationTest {
         resource.setDescription("Public resource description");
         resource.setUrl("https://example.test/resource");
         resourceRepository.save(resource);
+
+        Resource classResource = new Resource();
+        classResource.setTitle("Scoped resource " + token);
+        classResource.setSubject("Scoped subject " + token);
+        classResource.setDescription("Scoped resource description");
+        classResource.setUrl("https://example.test/scoped-resource");
+        classResource.setDepartment("Computer Science");
+        classResource.setSemester(3);
+        classResource.setSection("B");
+        resourceRepository.save(classResource);
+
+        User matchingStudent = createStudent(token + "-matching", privatePassword);
+        matchingStudent.setDepartment("Computer Science");
+        matchingStudent.setSection("B");
+        userRepository.save(matchingStudent);
         entityManager.flush();
 
         String html = mockMvc.perform(get("/search")
@@ -148,6 +163,7 @@ class SearchIntegrationTest {
         assertTrue(html.contains("href=\"https://example.test/resource\""));
         assertTrue(html.contains("target=\"_blank\""));
         assertTrue(html.contains("rel=\"noopener noreferrer\""));
+        assertFalse(html.contains("Scoped resource " + token));
         assertFalse(html.contains("Private task " + token));
         assertFalse(html.contains("Private task description " + token));
         assertFalse(html.contains("Private profile " + token));
@@ -171,6 +187,14 @@ class SearchIntegrationTest {
                 .getResponse()
                 .getContentAsString();
         assertTrue(noResultsHtml.contains("No results found."));
+
+        String matchingClassHtml = mockMvc.perform(get("/search")
+                        .param("query", "Scoped resource " + token)
+                        .session(authenticatedSession(matchingStudent.getEmail())))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        assertTrue(matchingClassHtml.contains("Scoped resource " + token));
+        assertTrue(matchingClassHtml.contains("href=\"https://example.test/scoped-resource\""));
     }
 
     private User createStudent(String token, String password) {
