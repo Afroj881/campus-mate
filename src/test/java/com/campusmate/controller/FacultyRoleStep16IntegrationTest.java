@@ -262,6 +262,9 @@ class FacultyRoleStep16IntegrationTest {
         Long adminId = admin.getId();
         Long facultyId = faculty.getId();
         Long subjectId = subject.getId();
+        User nonFaculty = createUser("assignment-non-faculty-" + unique + "@example.test", User.Role.STUDENT,
+                "Computer Science", 3, "A");
+        Long nonFacultyId = nonFaculty.getId();
 
         try {
             mockMvc.perform(get("/admin/teacher-subject-assignments").session(adminSession))
@@ -285,6 +288,23 @@ class FacultyRoleStep16IntegrationTest {
 
             assertEquals(1, teacherSubjectAssignmentRepository.findByFacultyWithSubject(faculty).size());
 
+            mockMvc.perform(post("/admin/teacher-subject-assignments")
+                            .session(adminSession).param("_csrf", csrf)
+                            .param("facultyId", String.valueOf(facultyId))
+                            .param("subjectId", String.valueOf(subjectId))
+                            .param("department", "Computer Science")
+                            .param("semester", "3").param("section", "a"))
+                    .andExpect(status().is3xxRedirection());
+            mockMvc.perform(post("/admin/teacher-subject-assignments")
+                            .session(adminSession).param("_csrf", csrf)
+                            .param("facultyId", String.valueOf(nonFacultyId))
+                            .param("subjectId", String.valueOf(subjectId))
+                            .param("department", "Computer Science")
+                            .param("semester", "3").param("section", "B"))
+                    .andExpect(status().is3xxRedirection());
+            assertEquals(1, teacherSubjectAssignmentRepository.findByFacultyWithSubject(faculty).size());
+            assertTrue(teacherSubjectAssignmentRepository.findByFaculty(nonFaculty).isEmpty());
+
             mockMvc.perform(get("/admin/teacher-subject-assignments").session(adminSession))
                     .andExpect(status().isOk())
                     .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.content()
@@ -305,6 +325,7 @@ class FacultyRoleStep16IntegrationTest {
         } finally {
             transactionTemplate.executeWithoutResult(status -> {
                 teacherSubjectAssignmentRepository.findByFaculty(faculty).forEach(teacherSubjectAssignmentRepository::delete);
+                userRepository.deleteById(nonFacultyId);
                 userRepository.findByEmailIgnoreCase("assignment-student-" + unique + "@example.test")
                         .ifPresent(userRepository::delete);
                 userRepository.deleteById(facultyId);

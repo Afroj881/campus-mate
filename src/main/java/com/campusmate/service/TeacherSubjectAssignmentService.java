@@ -5,7 +5,9 @@ import com.campusmate.model.TeacherSubjectAssignment;
 import com.campusmate.model.User;
 import com.campusmate.repository.TeacherSubjectAssignmentRepository;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,16 +40,36 @@ public class TeacherSubjectAssignmentService {
 
     @Transactional
     public TeacherSubjectAssignment createAssignment(User faculty, Subject subject, String department, Integer semester, String section) {
-        if (!canFacultyManageClass(faculty, subject, semester, section)) {
-            throw new IllegalArgumentException("This faculty member is not assigned to the selected subject and class.");
+        if (faculty == null || faculty.getRole() != User.Role.FACULTY) {
+            throw new IllegalArgumentException("Select a faculty account.");
+        }
+        if (subject == null) throw new IllegalArgumentException("Select a subject.");
+        String normalizedDepartment = department == null ? "" : department.trim();
+        String normalizedSection = section == null ? "" : section.trim().toUpperCase(Locale.ROOT);
+        if (normalizedDepartment.isBlank() || normalizedDepartment.length() > 120
+                || semester == null || semester < 1
+                || normalizedSection.isBlank() || normalizedSection.length() > 10) {
+            throw new IllegalArgumentException("Enter a valid department, semester, and section.");
+        }
+        if (subject.getDepartment() == null || !subject.getDepartment().trim().equalsIgnoreCase(normalizedDepartment)
+                || subject.getSemester() == null || !subject.getSemester().equals(semester)) {
+            throw new IllegalArgumentException("The selected subject does not belong to that department and semester.");
+        }
+        if (teacherSubjectAssignmentRepository.existsByFacultyAndSubjectAndSemesterAndSection(
+                faculty, subject, semester, normalizedSection)) {
+            throw new IllegalArgumentException("This faculty assignment already exists.");
         }
         TeacherSubjectAssignment assignment = new TeacherSubjectAssignment();
         assignment.setFaculty(faculty);
         assignment.setSubject(subject);
-        assignment.setDepartment(department == null ? subject.getDepartment() : department.trim());
+        assignment.setDepartment(normalizedDepartment);
         assignment.setSemester(semester);
-        assignment.setSection(section == null ? "A" : section.trim().toUpperCase());
-        return teacherSubjectAssignmentRepository.save(assignment);
+        assignment.setSection(normalizedSection);
+        try {
+            return teacherSubjectAssignmentRepository.save(assignment);
+        } catch (DataIntegrityViolationException ex) {
+            throw new IllegalArgumentException("This faculty assignment already exists.", ex);
+        }
     }
 
     @Transactional

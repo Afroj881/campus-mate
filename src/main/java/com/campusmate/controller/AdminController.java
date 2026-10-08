@@ -5,7 +5,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import com.campusmate.model.Event;
 import com.campusmate.model.Club;
 import com.campusmate.model.Subject;
-import com.campusmate.model.TeacherSubjectAssignment;
 import com.campusmate.model.Timetable;
 import com.campusmate.model.User;
 import com.campusmate.repository.SubjectRepository;
@@ -16,10 +15,12 @@ import com.campusmate.service.NoticeService;
 import com.campusmate.service.SubjectService;
 import com.campusmate.service.TimetableService;
 import com.campusmate.service.ResourceService;
+import com.campusmate.service.TeacherSubjectAssignmentService;
 import com.campusmate.service.UserService;
 import jakarta.validation.Valid;
 import java.time.DayOfWeek;
 import org.springframework.security.core.Authentication;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,12 +44,14 @@ public class AdminController {
     private final SubjectService subjectService;
     private final SubjectRepository subjectRepository;
     private final TeacherSubjectAssignmentRepository teacherSubjectAssignmentRepository;
+    private final TeacherSubjectAssignmentService teacherSubjectAssignmentService;
 
     public AdminController(NoticeService noticeService, EventService eventService,
                            TimetableService timetableService, ClubService clubService,
                            ResourceService resourceService, UserService userService,
                            SubjectService subjectService, SubjectRepository subjectRepository,
-                           TeacherSubjectAssignmentRepository teacherSubjectAssignmentRepository) {
+                           TeacherSubjectAssignmentRepository teacherSubjectAssignmentRepository,
+                           TeacherSubjectAssignmentService teacherSubjectAssignmentService) {
         this.noticeService = noticeService;
         this.eventService = eventService;
         this.timetableService = timetableService;
@@ -58,6 +61,7 @@ public class AdminController {
         this.subjectService = subjectService;
         this.subjectRepository = subjectRepository;
         this.teacherSubjectAssignmentRepository = teacherSubjectAssignmentRepository;
+        this.teacherSubjectAssignmentService = teacherSubjectAssignmentService;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -394,16 +398,12 @@ public class AdminController {
                     .orElseThrow(() -> new IllegalArgumentException("Faculty not found."));
             Subject subject = subjectRepository.findById(subjectId)
                     .orElseThrow(() -> new IllegalArgumentException("Subject not found."));
-            TeacherSubjectAssignment assignment = new TeacherSubjectAssignment();
-            assignment.setFaculty(faculty);
-            assignment.setSubject(subject);
-            assignment.setDepartment(department);
-            assignment.setSemester(semester);
-            assignment.setSection(section);
-            teacherSubjectAssignmentRepository.save(assignment);
+            teacherSubjectAssignmentService.createAssignment(faculty, subject, department, semester, section);
             redirectAttributes.addFlashAttribute("successMessage", "Teacher assignment created successfully.");
         } catch (IllegalArgumentException ex) {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+        } catch (DataIntegrityViolationException ex) {
+            redirectAttributes.addFlashAttribute("errorMessage", "This faculty assignment already exists.");
         }
         return "redirect:/admin/teacher-subject-assignments";
     }
