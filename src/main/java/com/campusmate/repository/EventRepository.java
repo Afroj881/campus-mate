@@ -14,6 +14,9 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findByDateGreaterThanEqualOrderByDateAscTimeAsc(LocalDate date);
 
+    @Query("select e from Event e where e.date > :today or (e.date = :today and e.time >= :time) order by e.date asc, e.time asc")
+    List<Event> findUpcomingEvents(@Param("today") LocalDate today, @Param("time") java.time.LocalTime time);
+
         List<Event> findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrOrganizerContainingIgnoreCaseOrVenueContainingIgnoreCase(
             String title, String description, String organizer, String venue);
 

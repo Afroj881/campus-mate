@@ -29,7 +29,7 @@ public class EventService {
     }
 
     public List<Event> getUpcomingEvents() {
-        return eventRepository.findByDateGreaterThanEqualOrderByDateAscTimeAsc(LocalDate.now());
+        return eventRepository.findUpcomingEvents(LocalDate.now(), LocalTime.now());
     }
 
     public List<Event> getUpcomingDashboardEvents() {
