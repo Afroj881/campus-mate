@@ -1,4 +1,42 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Campus Notices | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
-<body><main class="dashboard-card"><header class="dashboard-header"><div><p class="eyebrow">CAMPUS MATE / BULLETIN</p><h1>Campus Notices</h1></div><a class="button secondary" th:href="@{/dashboard}">Dashboard</a></header>
-<section class="notice-list" th:if="${!#lists.isEmpty(notices)}"><article class="notice-card" th:each="notice : ${notices}"><p class="notice-meta"><span th:text="${notice.category}">General</span> · <time th:text="${#temporals.format(notice.date,'dd MMM yyyy')}">01 Jan</time></p><h2 th:text="${notice.title}">Notice title</h2><p th:text="${notice.description}">Notice description</p></article></section>
-<p class="empty-state" th:if="${#lists.isEmpty(notices)}">No notices are available.</p></main></body></html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Campus Notices | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard student-notices-page">
+    <main class="student-notices-main">
+        <header class="student-notices-header">
+            <a class="dashboard-brand" th:href="@{/dashboard}" aria-label="Campus Mate Student Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span>
+            </a>
+            <a class="notices-back-link" th:href="@{/dashboard}">Student Dashboard</a>
+        </header>
+
+        <section class="student-notices-intro">
+            <p class="dashboard-eyebrow">STUDENT PORTAL <span aria-hidden="true">/</span> CAMPUS BULLETIN</p>
+            <h1>Notices</h1>
+            <p>Updates and announcements from across campus.</p>
+        </section>
+
+        <section class="student-notice-list" aria-label="Campus notices">
+            <article class="student-notice-card" th:each="notice : ${notices}">
+                <div class="student-notice-card-top">
+                    <span class="notice-category" th:text="${notice.category}">General</span>
+                    <time class="student-notice-date" th:text="${#temporals.format(notice.date, 'dd MMM yyyy')}" th:datetime="${notice.date}">01 Jan 2026</time>
+                </div>
+                <h2 th:text="${notice.title}">Notice title</h2>
+                <p th:text="${notice.description}">Notice description</p>
+            </article>
+            <div class="empty-state student-notices-empty" th:if="${#lists.isEmpty(notices)}">
+                <span class="empty-state-mark" aria-hidden="true">N</span>
+                <strong>No notices available.</strong>
+            </div>
+        </section>
+        <footer class="dashboard-footer"><span>Campus Mate</span><span>Student Portal</span></footer>
+    </main>
+</body>
+</html>

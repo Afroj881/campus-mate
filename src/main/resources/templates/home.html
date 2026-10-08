@@ -1,2 +1,69 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
-<body><main class="welcome"><p class="eyebrow">CAMPUS MATE</p><h1>Student community</h1><p>Register or sign in to open your role-specific dashboard.</p><nav class="actions"><a class="button" th:href="@{/register}">Register</a><a class="button secondary" th:href="@{/login}">Sign in</a></nav></main></body></html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f7f4">
+    <title>Campus mate | Your campus, connected</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="/" aria-label="Campus mate home">
+        <span class="brand-mark" aria-hidden="true">c<span>.</span></span>
+        <span>campus mate</span>
+    </a>
+    <div class="header-actions" th:if="${userName == null}">
+        <span class="header-note"><span class="status-dot"></span> A little closer to campus life</span>
+        <a class="header-auth-link" th:href="@{/login}">Sign in</a>
+        <a class="header-auth-primary" th:href="@{/register}">Join</a>
+    </div>
+    <div class="header-actions" th:if="${userName != null}">
+        <span class="header-note"><span class="status-dot"></span> Hi, <span th:text="${userName}">Student</span></span>
+        <form method="post" th:action="@{/logout}"><button class="header-auth-link" type="submit">Log out</button></form>
+    </div>
+</header>
+
+<main class="hero">
+    <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> YOUR CAMPUS, CONNECTED</p>
+        <h1>Make campus<br>feel <span>like yours.</span></h1>
+        <p class="intro">The people, places, and little moments that make college feel like home—all in one place.</p>
+        <a class="explore-link" href="#welcome">Take a look <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <div class="hero-art" aria-label="Illustration of a campus courtyard">
+        <div class="sun"></div>
+        <div class="cloud cloud-one"></div>
+        <div class="cloud cloud-two"></div>
+        <div class="hill hill-back"></div>
+        <div class="campus-building">
+            <div class="roof"></div>
+            <div class="building-body">
+                <div class="building-window"></div><div class="building-window"></div><div class="building-window"></div>
+                <div class="building-door"></div>
+            </div>
+        </div>
+        <div class="tree tree-left"><i></i><b></b></div>
+        <div class="tree tree-right"><i></i><b></b></div>
+        <div class="hill hill-front"></div>
+        <div class="path"></div>
+        <div class="art-label"><span>✳</span> made for campus days</div>
+    </div>
+
+    <div class="hero-foot" id="welcome">
+        <span class="foot-number">01 <i></i> 03</span>
+        <p>Good things happen<br>when we find our people.</p>
+        <span class="foot-decoration" aria-hidden="true">✳</span>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <span>© 2026 Campus mate</span>
+    <span>Made for the days that make college.</span>
+</footer>
+</body>
+</html>
