@@ -57,9 +57,9 @@ public class Timetable {
     public Timetable() {
     }
 
-    @AssertTrue(message = "End time must not be earlier than start time.")
+    @AssertTrue(message = "End time must be later than start time.")
     public boolean isEndTimeValid() {
-        return startTime == null || endTime == null || !endTime.isBefore(startTime);
+        return startTime == null || endTime == null || endTime.isAfter(startTime);
     }
 
     public Long getId() {

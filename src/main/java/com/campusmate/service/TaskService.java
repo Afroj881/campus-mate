@@ -3,6 +3,7 @@ package com.campusmate.service;
 import com.campusmate.model.Task;
 import com.campusmate.model.User;
 import com.campusmate.repository.TaskRepository;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class TaskService {
     }
 
     public List<Task> getUpcomingPendingTasksForUser(User user) {
-        return taskRepository.findTop5ByUserAndStatusOrderByDeadlineAscIdAsc(user, Task.Status.PENDING);
+        return taskRepository.findTop5ByUserAndStatusAndDeadlineGreaterThanEqualOrderByDeadlineAscIdAsc(
+                user, Task.Status.PENDING, LocalDate.now());
     }
 
     public long countPendingTasksForUser(User user) {

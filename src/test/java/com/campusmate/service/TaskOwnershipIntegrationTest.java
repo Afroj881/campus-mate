@@ -58,6 +58,24 @@ class TaskOwnershipIntegrationTest {
         assertEquals(List.of(secondTask.getId()), taskService.getTasksForUser(secondStudent).stream().map(Task::getId).toList());
     }
 
+    @Test
+    @Transactional
+    void dashboardUpcomingTasksExcludeOverdueDeadlinesAndKeepToday() {
+        User student = userRepository.save(createStudent("upcoming"));
+        Task overdue = createTask("Overdue task");
+        overdue.setDeadline(LocalDate.now().minusDays(1));
+        Task dueToday = createTask("Due today");
+        dueToday.setDeadline(LocalDate.now());
+        Task future = createTask("Future task");
+        future.setDeadline(LocalDate.now().plusDays(1));
+        taskService.createTask(overdue, student);
+        taskService.createTask(dueToday, student);
+        taskService.createTask(future, student);
+
+        assertEquals(List.of("Due today", "Future task"), taskService.getUpcomingPendingTasksForUser(student)
+                .stream().map(Task::getTitle).toList());
+    }
+
     private User createStudent(String label) {
         User user = new User();
         user.setName("Planner Test " + label);

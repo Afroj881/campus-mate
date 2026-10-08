@@ -370,6 +370,15 @@ class SecurityAuditIntegrationTest {
         assertTrue(invalidTimetable.getResponse().getContentAsString()
                 .contains("Subject must be 255 characters or fewer."));
 
+        MvcResult zeroLengthTimetable = mockMvc.perform(post("/admin/timetable")
+                        .session(adminSession).param("_csrf", adminCsrf)
+                        .param("day", "MONDAY").param("subject", "Validation subject")
+                        .param("faculty", "Faculty").param("room", "Room")
+                        .param("startTime", "09:00").param("endTime", "09:00"))
+                .andExpect(status().isOk()).andReturn();
+        assertTrue(zeroLengthTimetable.getResponse().getContentAsString()
+                .contains("End time must be later than start time."));
+
         MvcResult invalidClub = mockMvc.perform(post("/admin/clubs")
                         .session(adminSession).param("_csrf", adminCsrf)
                         .param("name", overClubLimit).param("description", "Club")
