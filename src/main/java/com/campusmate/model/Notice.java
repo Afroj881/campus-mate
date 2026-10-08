@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -19,14 +20,17 @@ public class Notice {
     private Long id;
 
     @NotBlank(message = "Title is required.")
+    @Size(max = 255, message = "Title must be 255 characters or fewer.")
     @Column(nullable = false)
     private String title;
 
     @NotBlank(message = "Description is required.")
+    @Size(max = 65535, message = "Description is too long.")
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @NotBlank(message = "Category is required.")
+    @Size(max = 255, message = "Category must be 255 characters or fewer.")
     @Column(nullable = false)
     private String category;
 

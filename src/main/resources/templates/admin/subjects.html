@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects | Campus mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+<div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+        <a class="dashboard-brand" href="/dashboard/admin">
+            <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+            <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+        </a>
+        <nav class="dashboard-nav">
+            <a class="dashboard-nav-link" th:href="@{/dashboard/admin}"><span class="dashboard-nav-icon" aria-hidden="true">01</span>Dashboard</a>
+            <a class="dashboard-nav-link" th:href="@{/admin/faculty}"><span class="dashboard-nav-icon" aria-hidden="true">02</span>Faculty</a>
+            <a class="dashboard-nav-link is-active" th:href="@{/admin/subjects}"><span class="dashboard-nav-icon" aria-hidden="true">03</span>Subjects</a>
+            <a class="dashboard-nav-link" th:href="@{/admin/teacher-subject-assignments}"><span class="dashboard-nav-icon" aria-hidden="true">04</span>Assignments</a>
+        </nav>
+    </aside>
+    <main class="dashboard-main">
+        <header class="dashboard-header"><div><p class="dashboard-eyebrow">ADMIN PORTAL <span aria-hidden="true">/</span> SUBJECTS</p><h1>Subjects</h1></div></header>
+        <section class="dashboard-content-grid">
+            <article class="dashboard-panel">
+                <form class="admin-form" th:action="@{/admin/subjects}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <div class="admin-form-field"><label for="subject-name">Name</label><input id="subject-name" name="name" type="text" required></div>
+                    <div class="admin-form-field"><label for="subject-code">Code</label><input id="subject-code" name="code" type="text" required></div>
+                    <div class="admin-form-field"><label for="subject-department">Department</label><input id="subject-department" name="department" type="text" required></div>
+                    <div class="admin-form-field"><label for="subject-semester">Semester</label><input id="subject-semester" name="semester" type="number" min="1" required></div>
+                    <button class="auth-submit" type="submit">Create subject</button>
+                </form>
+            </article>
+            <article class="dashboard-panel">
+                <div class="notice-preview-list" th:if="${!#lists.isEmpty(subjects)}">
+                    <div class="notice-preview" th:each="subject : ${subjects}">
+                        <span class="notice-preview-copy">
+                            <strong th:text="${subject.name + ' (' + subject.code + ')'}">Subject</strong>
+                            <small th:text="${subject.department + ' · Semester ' + subject.semester}">Department</small>
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>

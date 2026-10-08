@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Subject Assignments | Campus mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+<div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+        <a class="dashboard-brand" href="/dashboard/admin">
+            <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+            <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+        </a>
+        <nav class="dashboard-nav">
+            <a class="dashboard-nav-link" th:href="@{/dashboard/admin}"><span class="dashboard-nav-icon" aria-hidden="true">01</span>Dashboard</a>
+            <a class="dashboard-nav-link" th:href="@{/admin/faculty}"><span class="dashboard-nav-icon" aria-hidden="true">02</span>Faculty</a>
+            <a class="dashboard-nav-link" th:href="@{/admin/subjects}"><span class="dashboard-nav-icon" aria-hidden="true">03</span>Subjects</a>
+            <a class="dashboard-nav-link is-active" th:href="@{/admin/teacher-subject-assignments}"><span class="dashboard-nav-icon" aria-hidden="true">04</span>Assignments</a>
+        </nav>
+    </aside>
+    <main class="dashboard-main">
+        <header class="dashboard-header"><div><p class="dashboard-eyebrow">ADMIN PORTAL <span aria-hidden="true">/</span> TEACHER ASSIGNMENTS</p><h1>Teacher-Subject-Class Assignments</h1></div></header>
+        <section class="dashboard-content-grid">
+            <article class="dashboard-panel">
+                <form class="admin-form" th:action="@{/admin/teacher-subject-assignments}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <div class="admin-form-field"><label for="assignment-faculty">Faculty</label>
+                    <select id="assignment-faculty" name="facultyId" required>
+                        <option value="">Select faculty</option>
+                        <option th:each="faculty : ${facultyMembers}" th:value="${faculty.id}" th:text="${faculty.name + ' · ' + faculty.department}">Faculty</option>
+                    </select>
+                    </div>
+                    <div class="admin-form-field"><label for="assignment-subject">Subject</label>
+                    <select id="assignment-subject" name="subjectId" required>
+                        <option value="">Select subject</option>
+                        <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name + ' (' + subject.code + ')'}">Subject</option>
+                    </select>
+                    </div>
+                    <div class="admin-form-field"><label for="assignment-department">Department</label><input id="assignment-department" name="department" type="text" required></div>
+                    <div class="admin-form-field"><label for="assignment-semester">Semester</label><input id="assignment-semester" name="semester" type="number" min="1" required></div>
+                    <div class="admin-form-field"><label for="assignment-section">Section</label><input id="assignment-section" name="section" type="text" maxlength="10" required></div>
+                    <button class="auth-submit" type="submit">Create teaching assignment</button>
+                </form>
+            </article>
+            <article class="dashboard-panel">
+                <div class="notice-preview-list" th:if="${!#lists.isEmpty(teacherAssignments)}">
+                    <div class="notice-preview" th:each="entry : ${teacherAssignments}">
+                        <span class="notice-preview-copy">
+                            <strong th:text="${entry.faculty.name + ' · ' + entry.subject.name}">Entry</strong>
+                            <small th:text="${entry.department + ' · Semester ' + entry.semester + ' · Section ' + entry.section}">Details</small>
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>

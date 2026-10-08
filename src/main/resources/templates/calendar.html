@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Academic Calendar | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+<div class="dashboard-shell calendar-shell">
+    <main class="dashboard-main calendar-main">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-eyebrow">CAMPUS MATE <span aria-hidden="true">/</span> ACADEMIC DATES</p>
+                <h1>Academic Calendar</h1>
+                <p class="dashboard-welcome">Important dates for the college community.</p>
+            </div>
+        </header>
+        <section class="dashboard-panel calendar-panel" aria-label="Academic calendar entries">
+            <div class="panel-heading">
+                <div><p class="panel-kicker">ACADEMIC YEAR</p><h2>Upcoming and scheduled dates</h2></div>
+                <span class="panel-count" th:text="${#lists.size(calendarEntries)}">0</span>
+            </div>
+            <div class="calendar-list" th:if="${!#lists.isEmpty(calendarEntries)}">
+                <article class="calendar-entry" th:each="entry : ${calendarEntries}">
+                    <div class="calendar-entry-date">
+                        <strong th:text="${#temporals.format(entry.eventDate, 'd MMMM yyyy')}">15 August 2026</strong>
+                        <span th:if="${entry.endDate != null}">Through <span th:text="${#temporals.format(entry.endDate, 'd MMMM yyyy')}">20 August 2026</span></span>
+                    </div>
+                    <div class="calendar-entry-content">
+                        <span class="calendar-event-type" th:text="${entry.eventType.displayName}">Important Academic Date</span>
+                        <span class="calendar-date-status" th:if="${entry.endDate != null ? !entry.endDate.isBefore(today) : !entry.eventDate.isBefore(today)}">Upcoming</span>
+                        <span class="calendar-date-status calendar-date-past" th:if="${entry.endDate != null ? entry.endDate.isBefore(today) : entry.eventDate.isBefore(today)}">Past</span>
+                        <h3 th:text="${entry.title}">Calendar entry</h3>
+                        <p th:text="${entry.description}">Details about this academic date.</p>
+                    </div>
+                </article>
+            </div>
+            <div class="empty-state" th:if="${#lists.isEmpty(calendarEntries)}">
+                <span class="empty-state-mark" aria-hidden="true">C</span>
+                <strong>No academic dates have been added yet.</strong>
+            </div>
+        </section>
+        <footer class="dashboard-footer"><a th:href="${dashboardUrl}">Return to dashboard</a><span>Academic Calendar</span></footer>
+    </main>
+</div>
+</body>
+</html>

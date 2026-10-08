@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageHeading} + ' | Campus Mate'">Event | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-dashboard">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" aria-label="Admin navigation">
+            <a class="dashboard-brand" th:href="@{/dashboard/admin}" aria-label="Campus Mate Admin Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+            </a>
+            <p class="dashboard-nav-label">Workspace</p>
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <a class="dashboard-nav-link" th:href="@{/dashboard/admin}"><span class="dashboard-nav-icon" aria-hidden="true">D</span>Dashboard</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/notices}"><span class="dashboard-nav-icon" aria-hidden="true">N</span>Notices</a>
+                <a class="dashboard-nav-link is-active" th:href="@{/admin/events}"><span class="dashboard-nav-icon" aria-hidden="true">E</span>Events</a>
+                <a class="dashboard-nav-link" th:href="@{/dashboard/admin#manage-timetable}"><span class="dashboard-nav-icon" aria-hidden="true">T</span>Timetable</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/clubs}"><span class="dashboard-nav-icon" aria-hidden="true">C</span>Clubs</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/resources}"><span class="dashboard-nav-icon" aria-hidden="true">R</span>Resources</a>
+            </nav>
+            <div class="dashboard-sidebar-bottom">
+                <div class="sidebar-student admin-sidebar-user"><span class="student-avatar" aria-hidden="true">A</span><span class="sidebar-student-copy"><strong>Administrator</strong><small>Admin account</small></span></div>
+                <form class="dashboard-logout-form" th:action="@{/logout}" method="post">
+                    <button class="dashboard-logout" type="submit"><span aria-hidden="true">↗</span>Logout</button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="dashboard-eyebrow">CAMPUS MATE <span aria-hidden="true">/</span> EVENTS</p>
+                    <h1 th:text="${pageHeading}">Add Event</h1>
+                </div>
+            </header>
+
+            <section class="dashboard-panel notice-form-panel" aria-label="Event details">
+                <div class="panel-heading"><div><p class="panel-kicker">CAMPUS CALENDAR</p><h2>Event details</h2></div></div>
+                <form class="notice-form" th:object="${event}" th:action="@{${eventAction}}" method="post">
+                    <div class="notice-form-error-summary" th:if="${#fields.hasErrors('*')}">Please correct the highlighted fields and try again.</div>
+                    <div class="notice-form-field">
+                        <label for="title">Title</label>
+                        <input id="title" type="text" th:field="*{title}" required>
+                        <span class="notice-field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title is required.</span>
+                    </div>
+                    <div class="notice-form-field">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="6" th:field="*{description}" required></textarea>
+                        <span class="notice-field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description is required.</span>
+                    </div>
+                    <div class="notice-form-row">
+                        <div class="notice-form-field">
+                            <label for="date">Date</label>
+                            <input id="date" type="date" th:field="*{date}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date is required.</span>
+                        </div>
+                        <div class="notice-form-field">
+                            <label for="time">Time</label>
+                            <input id="time" type="time" th:field="*{time}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('time')}" th:errors="*{time}">Time is required.</span>
+                        </div>
+                    </div>
+                    <div class="notice-form-row">
+                        <div class="notice-form-field">
+                            <label for="venue">Venue</label>
+                            <input id="venue" type="text" th:field="*{venue}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}">Venue is required.</span>
+                        </div>
+                        <div class="notice-form-field">
+                            <label for="organizer">Organizer</label>
+                            <input id="organizer" type="text" th:field="*{organizer}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('organizer')}" th:errors="*{organizer}">Organizer is required.</span>
+                        </div>
+                    </div>
+                    <div class="notice-form-actions">
+                        <button class="notice-save-button" type="submit">Save Event</button>
+                        <a class="notice-cancel-button" th:href="@{/admin/events}">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

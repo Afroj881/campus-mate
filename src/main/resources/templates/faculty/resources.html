@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>My Notes | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body class="student-dashboard">
+<main class="student-notices-main">
+    <header class="student-notices-header"><a class="dashboard-brand" th:href="@{/faculty/dashboard}"><span class="dashboard-brand-mark">CM</span><span class="dashboard-brand-copy">Campus Mate<small>FACULTY PORTAL</small></span></a><a class="notices-back-link" th:href="@{/faculty/dashboard}">Back to dashboard</a></header>
+    <section class="student-notices-intro"><p class="dashboard-eyebrow">TEACHING MATERIALS</p><h1>My Notes</h1><p>Upload resources for classes assigned to you and manage your own uploads.</p><a class="admin-action-button" th:href="@{/faculty/resources/new}">Upload Notes</a></section>
+    <p class="notice-field-info" th:if="${successMessage}" th:text="${successMessage}"></p>
+    <section class="student-notice-list" th:if="${!#lists.isEmpty(resources)}"><article class="student-notice-card" th:each="resource : ${resources}">
+        <p class="dashboard-eyebrow" th:text="${resource.subject + ' · ' + resource.department + ' · Semester ' + resource.semester + ' · Section ' + resource.section}">Class details</p><h2 th:text="${resource.title}">Title</h2><p th:text="${resource.description}">Description</p><p><strong>File:</strong> <span th:text="${resource.originalFilename}">Notes.pdf</span></p>
+        <div class="notice-form-actions"><a class="admin-action-button" th:href="@{/resources/{id}/download(id=${resource.id})}">Download</a><form th:action="@{/faculty/resources/{id}/delete(id=${resource.id})}" method="post"><button class="notice-delete-button" type="submit">Delete</button></form></div>
+    </article></section>
+    <div class="empty-state student-notices-empty" th:if="${#lists.isEmpty(resources)}"><strong>You have not uploaded any notes.</strong></div>
+</main></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Profile | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" aria-label="Student navigation">
+            <a class="dashboard-brand" th:href="@{/dashboard}" aria-label="Campus Mate Student Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span>
+            </a>
+            <p class="dashboard-nav-label">Workspace</p>
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <a class="dashboard-nav-link" th:href="@{/dashboard}"><span class="dashboard-nav-icon" aria-hidden="true">01</span>Dashboard</a>
+                <a class="dashboard-nav-link" th:href="@{/timetable}"><span class="dashboard-nav-icon" aria-hidden="true">02</span>Timetable</a>
+                <a class="dashboard-nav-link" th:href="@{/planner}"><span class="dashboard-nav-icon" aria-hidden="true">03</span>Academic Planner</a>
+                <a class="dashboard-nav-link" th:href="@{/notices}"><span class="dashboard-nav-icon" aria-hidden="true">04</span>Notices</a>
+                <a class="dashboard-nav-link" th:href="@{/events}"><span class="dashboard-nav-icon" aria-hidden="true">05</span>Events</a>
+                <a class="dashboard-nav-link" th:href="@{/clubs}"><span class="dashboard-nav-icon" aria-hidden="true">06</span>Clubs</a>
+                <a class="dashboard-nav-link" th:href="@{/resources}"><span class="dashboard-nav-icon" aria-hidden="true">07</span>Resources</a>
+                <a class="dashboard-nav-link" th:href="@{/search}"><span class="dashboard-nav-icon" aria-hidden="true">08</span>Search</a>
+                <a class="dashboard-nav-link is-active" th:href="@{/profile}"><span class="dashboard-nav-icon" aria-hidden="true">09</span>Profile</a>
+            </nav>
+            <div class="dashboard-sidebar-bottom">
+                <div class="sidebar-student"><span class="student-avatar" aria-hidden="true">S</span><span class="sidebar-student-copy"><strong th:text="${profileDetails.name}">Student</strong><small>Student account</small></span></div>
+                <form class="dashboard-logout-form" th:action="@{/logout}" method="post"><button class="dashboard-logout" type="submit"><span aria-hidden="true">↗</span>Logout</button></form>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div><p class="dashboard-eyebrow">STUDENT PORTAL <span aria-hidden="true">/</span> ACCOUNT</p><h1>Profile</h1></div>
+            </header>
+            <div class="notice-success-message" th:if="${successMessage}" th:text="${successMessage}">Profile updated.</div>
+            <section class="dashboard-panel notice-form-panel" aria-label="Student profile">
+                <div class="panel-heading"><div><p class="panel-kicker">YOUR ACCOUNT</p><h2>Profile details</h2></div></div>
+                <form class="notice-form" th:object="${profileForm}" th:action="@{/profile}" method="post">
+                    <div class="notice-form-error-summary" th:if="${#fields.hasErrors('*')}">Please correct the highlighted fields and try again.</div>
+                    <div class="notice-form-field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}" maxlength="120" autocomplete="name" required><span class="notice-field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name is required.</span></div>
+                    <div class="notice-form-field"><label for="department">Department</label><input id="department" type="text" th:field="*{department}" maxlength="120" required><span class="notice-field-error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">Department is required.</span></div>
+                    <div class="notice-form-field"><label for="semester">Semester</label><input id="semester" type="number" th:field="*{semester}" min="1" step="1" required><span class="notice-field-error" th:if="${#fields.hasErrors('semester')}" th:errors="*{semester}">Semester is required.</span></div>
+                    <div class="notice-form-field"><label for="section">Section</label><input id="section" type="text" th:field="*{section}" maxlength="10" required><span class="notice-field-error" th:if="${#fields.hasErrors('section')}" th:errors="*{section}">Section is required.</span></div>
+                    <div class="notice-form-row">
+                        <div class="notice-form-field"><label for="email">Email</label><input id="email" type="email" th:value="${profileDetails.email}" readonly aria-readonly="true"></div>
+                        <div class="notice-form-field"><label for="role">Role</label><input id="role" type="text" th:value="${profileDetails.role}" readonly aria-readonly="true"></div>
+                    </div>
+                    <div class="notice-form-actions"><button class="notice-save-button" type="submit">Save Profile</button><a class="notice-cancel-button" th:href="@{/dashboard}">Cancel</a></div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

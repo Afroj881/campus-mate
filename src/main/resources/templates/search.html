@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+    <main class="student-notices-main">
+        <header class="student-notices-header">
+            <a class="dashboard-brand" th:href="@{/dashboard}" aria-label="Student Dashboard"><span class="dashboard-brand-mark" aria-hidden="true">CM</span><span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span></a>
+            <a class="notices-back-link" th:href="@{/dashboard}">Back to dashboard</a>
+        </header>
+        <section class="student-notices-intro"><p class="dashboard-eyebrow">CAMPUS MATE</p><h1>Search</h1></section>
+        <section class="dashboard-panel notice-form-panel" aria-label="Search campus content">
+            <form class="notice-form" th:action="@{/search}" method="get">
+                <div class="notice-form-field"><label for="query">Search campus content</label><input id="query" name="query" type="search" th:value="${query}" autocomplete="off"></div>
+                <div class="notice-form-actions"><button class="notice-save-button" type="submit">Search</button></div>
+            </form>
+        </section>
+        <p class="notice-form-error-summary" th:if="${#strings.isEmpty(query)}">Please enter a search term.</p>
+        <p class="notice-form-error-summary" th:if="${!#strings.isEmpty(query) and #lists.isEmpty(results)}">No results found.</p>
+        <section class="student-notice-list" aria-label="Search results" th:if="${!#strings.isEmpty(query) and !#lists.isEmpty(results)}">
+            <article class="student-notice-card" th:each="result : ${results}">
+                <span class="notice-category" th:text="${result.type}">Result type</span>
+                <h2 th:text="${result.title}">Result title</h2>
+                <p th:text="${result.description}">Result description</p>
+                <p class="notice-field-info" th:text="${result.relevantInformation}">Relevant information</p>
+                <div class="notice-form-actions">
+                    <a class="notice-edit-button" th:href="${result.viewUrl}">View</a>
+                    <a class="notice-edit-button" th:if="${result.openUrl != null}" th:href="${result.openUrl}" target="_blank" rel="noopener noreferrer">Open Resource</a>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

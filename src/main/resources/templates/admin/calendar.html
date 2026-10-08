@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Academic Calendar | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-dashboard">
+<div class="dashboard-shell">
+    <aside class="dashboard-sidebar" aria-label="Admin navigation">
+        <a class="dashboard-brand" th:href="@{/dashboard/admin}" aria-label="Campus Mate Admin Dashboard">
+            <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+            <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+        </a>
+        <p class="dashboard-nav-label">Workspace</p>
+        <nav class="dashboard-nav" aria-label="Main navigation">
+            <a class="dashboard-nav-link" th:href="@{/dashboard/admin}"><span class="dashboard-nav-icon" aria-hidden="true">D</span>Dashboard</a>
+            <a class="dashboard-nav-link is-active" th:href="@{/admin/calendar}"><span class="dashboard-nav-icon" aria-hidden="true">C</span>Academic Calendar</a>
+        </nav>
+        <div class="dashboard-sidebar-bottom">
+            <div class="sidebar-student admin-sidebar-user"><span class="student-avatar" aria-hidden="true">A</span><span class="sidebar-student-copy"><strong>Administrator</strong><small>Admin account</small></span></div>
+            <form class="dashboard-logout-form" th:action="@{/logout}" method="post"><button class="dashboard-logout" type="submit">Logout</button></form>
+        </div>
+    </aside>
+    <main class="dashboard-main">
+        <header class="dashboard-header">
+            <div><p class="dashboard-eyebrow">CAMPUS MATE <span aria-hidden="true">/</span> ACADEMIC CALENDAR</p><h1>Manage Academic Calendar</h1></div>
+            <a class="admin-action-button calendar-add-button" th:href="@{/admin/calendar/new}"><span aria-hidden="true">+</span>Add Date</a>
+        </header>
+        <section class="dashboard-panel" aria-label="Academic calendar management">
+            <div class="panel-heading"><div><p class="panel-kicker">ACADEMIC DATES</p><h2>Calendar entries</h2></div><span class="panel-count" th:text="${#lists.size(calendarEntries)}">0</span></div>
+            <div class="notice-success-message" th:if="${successMessage}" th:text="${successMessage}">Calendar entry saved.</div>
+            <div class="notice-table-wrap" th:if="${!#lists.isEmpty(calendarEntries)}">
+                <table class="notice-table calendar-table">
+                    <thead><tr><th>Title</th><th>Type</th><th>Dates</th><th>Description</th><th>Actions</th></tr></thead>
+                    <tbody>
+                    <tr th:each="entry : ${calendarEntries}">
+                        <td class="notice-table-title" th:text="${entry.title}">Semester Start</td>
+                        <td th:text="${entry.eventType.displayName}">Semester Start</td>
+                        <td class="notice-table-date"><span th:text="${#temporals.format(entry.eventDate, 'd MMM yyyy')}">15 Aug 2026</span><span th:if="${entry.endDate != null}"> – <span th:text="${#temporals.format(entry.endDate, 'd MMM yyyy')}">20 Aug 2026</span></span></td>
+                        <td class="notice-table-description" th:text="${entry.description}">Academic calendar details.</td>
+                        <td><div class="calendar-row-actions"><a class="notice-edit-button" th:href="@{/admin/calendar/edit/{id}(id=${entry.id})}">Edit</a><form th:action="@{/admin/calendar/delete/{id}(id=${entry.id})}" method="post" onsubmit="return confirm('Delete this academic calendar date?');"><button class="notice-delete-button" type="submit">Delete</button></form></div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="empty-state" th:if="${#lists.isEmpty(calendarEntries)}"><strong>No calendar dates yet.</strong><p>Add an academic date to share it with students and faculty.</p></div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -1,3 +1,163 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Dashboard | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
-<body class="dashboard-page"><main class="dashboard-card"><header class="dashboard-header"><div><p class="eyebrow">CAMPUS MATE / ADMIN</p><h1>Admin Dashboard</h1><p>Signed in as <strong th:text="${adminEmail}">admin@example.test</strong></p></div><form th:action="@{/logout}" method="post"><button class="button secondary" type="submit">Log out</button></form></header>
-<p><a class="button" th:href="@{/admin/notices}">Manage notices</a></p><section class="admin-welcome"><h2>Campus administration</h2><p>This area is available to Admin accounts.</p></section><footer>Campus Mate · Administration</footer></main></body></html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard | Campus mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-dashboard">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" aria-label="Admin navigation">
+            <a class="dashboard-brand" href="#overview" aria-label="Campus Mate Admin Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+            </a>
+
+            <p class="dashboard-nav-label">Workspace</p>
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <a class="dashboard-nav-link is-active" href="#overview"><span class="dashboard-nav-icon" aria-hidden="true">D</span>Dashboard</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/notices}"><span class="dashboard-nav-icon" aria-hidden="true">N</span>Notices</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/events}"><span class="dashboard-nav-icon" aria-hidden="true">E</span>Events</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/timetable}"><span class="dashboard-nav-icon" aria-hidden="true">T</span>Timetable</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/clubs}"><span class="dashboard-nav-icon" aria-hidden="true">C</span>Clubs</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/resources}"><span class="dashboard-nav-icon" aria-hidden="true">R</span>Resources</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/faculty}"><span class="dashboard-nav-icon" aria-hidden="true">F</span>Faculty Management</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/subjects}"><span class="dashboard-nav-icon" aria-hidden="true">S</span>Subjects</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/teacher-subject-assignments}"><span class="dashboard-nav-icon" aria-hidden="true">A</span>Teacher/Class Assignments</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/calendar}"><span class="dashboard-nav-icon" aria-hidden="true">C</span>Academic Calendar</a>
+            </nav>
+
+            <div class="dashboard-sidebar-bottom">
+                <div class="sidebar-student admin-sidebar-user">
+                    <span class="student-avatar" aria-hidden="true">A</span>
+                    <span class="sidebar-student-copy"><strong th:text="${adminName}">Admin</strong><small>Administrator</small></span>
+                </div>
+                <form class="dashboard-logout-form" th:action="@{/logout}" method="post">
+                    <button class="dashboard-logout" type="submit"><span aria-hidden="true">â†—</span>Logout</button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="dashboard-main" id="overview">
+            <header class="dashboard-header">
+                <div>
+                    <p class="dashboard-eyebrow">CAMPUS MATE <span aria-hidden="true">/</span> ADMINISTRATION</p>
+                    <h1>Admin Dashboard</h1>
+                    <p class="dashboard-welcome">Welcome, <strong th:text="${adminName}">Admin</strong></p>
+                </div>
+                <div class="dashboard-identity">
+                    <span class="identity-label">ADMIN EMAIL</span>
+                    <span class="identity-email" th:text="${adminEmail}">admin@campusmate.com</span>
+                </div>
+            </header>
+
+            <section class="dashboard-summary admin-statistics" aria-label="Campus statistics">
+                <article class="summary-card">
+                    <div class="summary-card-top"><span>Total Students</span><span class="summary-symbol" aria-hidden="true">S</span></div>
+                    <strong class="summary-value" th:text="${studentCount}">0</strong>
+                    <span class="summary-caption">Student records</span>
+                </article>
+                <article class="summary-card summary-sky">
+                    <div class="summary-card-top"><span>Total Notices</span><span class="summary-symbol" aria-hidden="true">N</span></div>
+                    <strong class="summary-value" th:text="${noticeCount}">0</strong>
+                    <span class="summary-caption">Published notices</span>
+                </article>
+                <article class="summary-card summary-indigo">
+                    <div class="summary-card-top"><span>Total Events</span><span class="summary-symbol" aria-hidden="true">E</span></div>
+                    <strong class="summary-value" th:text="${eventCount}">0</strong>
+                    <span class="summary-caption">Campus events</span>
+                </article>
+                <article class="summary-card summary-blue">
+                    <div class="summary-card-top"><span>Total Clubs</span><span class="summary-symbol" aria-hidden="true">C</span></div>
+                    <strong class="summary-value" th:text="${clubCount}">0</strong>
+                    <span class="summary-caption">Student clubs</span>
+                </article>
+                <article class="summary-card summary-cyan">
+                    <div class="summary-card-top"><span>Total Resources</span><span class="summary-symbol" aria-hidden="true">R</span></div>
+                    <strong class="summary-value" th:text="${resourceCount}">0</strong>
+                    <span class="summary-caption">Shared resources</span>
+                </article>
+            </section>
+
+            <section class="admin-actions-section" id="quick-actions" aria-labelledby="quick-actions-heading">
+                <div class="admin-section-heading">
+                    <div><p class="panel-kicker">CAMPUS TOOLS</p><h2 id="quick-actions-heading">Quick Actions</h2></div>
+                    <span class="admin-section-note">Management shortcuts</span>
+                </div>
+                <div class="admin-action-grid">
+                    <article class="admin-action-card" id="add-notice">
+                        <span class="admin-action-icon" aria-hidden="true">N</span>
+                        <div class="admin-action-copy"><h3>Add Notice</h3><p>Share an update with students.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/notices/new}"><span aria-hidden="true">+</span>Add Notice</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-notices">
+                        <span class="admin-action-icon" aria-hidden="true">N</span>
+                        <div class="admin-action-copy"><h3>Manage Notices</h3><p>Review campus announcements.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/notices}">Manage Notices</a>
+                    </article>
+                    <article class="admin-action-card" id="add-event">
+                        <span class="admin-action-icon" aria-hidden="true">E</span>
+                        <div class="admin-action-copy"><h3>Add Event</h3><p>Put a campus event on the calendar.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/events/new}"><span aria-hidden="true">+</span>Add Event</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-events">
+                        <span class="admin-action-icon" aria-hidden="true">E</span>
+                        <div class="admin-action-copy"><h3>Manage Events</h3><p>Review upcoming campus events.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/events}">Manage Events</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-timetable">
+                        <span class="admin-action-icon" aria-hidden="true">T</span>
+                        <div class="admin-action-copy"><h3>Manage Timetable</h3><p>Keep class schedules organized.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/timetable}">Manage Timetable</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-clubs">
+                        <span class="admin-action-icon" aria-hidden="true">C</span>
+                        <div class="admin-action-copy"><h3>Manage Clubs</h3><p>Review student club information.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/clubs}">Manage Clubs</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-resources">
+                        <span class="admin-action-icon" aria-hidden="true">R</span>
+                        <div class="admin-action-copy"><h3>Manage Resources</h3><p>Organize shared study materials.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/resources}">Manage Resources</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-academic-calendar">
+                        <span class="admin-action-icon" aria-hidden="true">C</span>
+                        <div class="admin-action-copy"><h3>Academic Calendar</h3><p>Manage important dates for the college community.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/calendar}">Manage Calendar</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-faculty">
+                        <span class="admin-action-icon" aria-hidden="true">F</span>
+                        <div class="admin-action-copy"><h3>Faculty Management</h3><p>View faculty accounts and create new faculty users.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/faculty}">Manage Faculty</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-subjects">
+                        <span class="admin-action-icon" aria-hidden="true">S</span>
+                        <div class="admin-action-copy"><h3>Subjects</h3><p>Maintain the subject catalog for teaching assignments.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/subjects}">Manage Subjects</a>
+                    </article>
+                    <article class="admin-action-card" id="manage-teacher-assignments">
+                        <span class="admin-action-icon" aria-hidden="true">A</span>
+                        <div class="admin-action-copy"><h3>Teacher/Class Assignments</h3><p>Assign faculty to subjects, departments, semesters, and sections.</p></div>
+                        <a class="admin-action-button" th:href="@{/admin/teacher-subject-assignments}">Manage Assignments</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="dashboard-panel admin-activity" id="recent-activity" aria-labelledby="activity-heading">
+                <div class="panel-heading">
+                    <div><p class="panel-kicker">CAMPUS MATE</p><h2 id="activity-heading">Recent Activity</h2></div>
+                    <span class="panel-count">0</span>
+                </div>
+                <div class="empty-state">
+                    <span class="empty-state-mark" aria-hidden="true">A</span>
+                    <strong>No recent activity</strong>
+                    <p>Updates to campus notices, events, and resources will appear here.</p>
+                </div>
+            </section>
+
+            <footer class="dashboard-footer"><span>Campus Mate</span><span>Admin Portal</span></footer>
+        </main>
+    </div>
+</body>
+</html>

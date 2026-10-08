@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Upload Notes | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body class="student-dashboard">
+<main class="student-notices-main">
+    <header class="student-notices-header"><a class="dashboard-brand" th:href="@{/faculty/dashboard}"><span class="dashboard-brand-mark">CM</span><span class="dashboard-brand-copy">Campus Mate<small>FACULTY PORTAL</small></span></a><a class="notices-back-link" th:href="@{/faculty/resources}">Back to my notes</a></header>
+    <section class="student-notices-intro"><p class="dashboard-eyebrow">TEACHING MATERIALS</p><h1>Upload Notes</h1><p>Files can be attached only to your current teaching assignments.</p></section>
+    <section class="notice-form-panel"><p class="notice-form-error-summary" th:if="${uploadError}" th:text="${uploadError}"></p>
+        <form class="notice-form" th:action="@{/faculty/resources}" th:object="${resourceForm}" method="post" enctype="multipart/form-data">
+            <div class="notice-form-field"><label for="title">Title</label><input id="title" type="text" th:field="*{title}" maxlength="160" required><span class="notice-field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span></div>
+            <div class="notice-form-field"><label for="description">Description</label><textarea id="description" rows="4" th:field="*{description}" maxlength="2000"></textarea><span class="notice-field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
+            <div class="notice-form-field"><label for="subjectAndClass">Subject and class</label><input id="subjectAndClass" type="text" th:field="*{subjectAndClass}" placeholder="Java Programming — Computer Science — Semester 5 — Section A" required></div>
+            <div class="notice-form-field"><label for="file">File (PDF, DOC/DOCX, PPT/PPTX, XLS/XLSX, TXT; max 10 MB)</label><input id="file" name="file" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt" required></div>
+            <div class="notice-form-actions"><button class="notice-save-button" type="submit">Upload Notes</button><a class="notice-cancel-button" th:href="@{/faculty/resources}">Cancel</a></div>
+        </form>
+    </section>
+</main></body></html>

@@ -1,10 +1,69 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Create account | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}">
-</head><body><main class="welcome form-card"><p class="eyebrow">STUDENT ACCOUNT</p><h1>Create your account</h1>
-<form th:action="@{/register}" th:object="${registrationForm}" method="post">
-<label>Name <input th:field="*{name}" autocomplete="name" required></label><small class="error" th:errors="*{name}"></small>
-<label>Email <input th:field="*{email}" type="email" autocomplete="email" required></label><small class="error" th:errors="*{email}"></small>
-<label>Password <input th:field="*{password}" type="password" minlength="8" maxlength="72" autocomplete="new-password" required></label><small class="error" th:errors="*{password}"></small>
-<label>Department <input th:field="*{department}" required></label><small class="error" th:errors="*{department}"></small>
-<label>Semester <input th:field="*{semester}" type="number" min="1" required></label><small class="error" th:errors="*{semester}"></small>
-<button class="button" type="submit">Register</button></form><p><a th:href="@{/login}">Already registered? Sign in</a></p></main></body></html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create account | Campus mate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+<header class="site-header">
+    <a class="brand" href="/" aria-label="Campus mate home">
+        <span class="brand-mark" aria-hidden="true">c<span>.</span></span>
+        <span>campus mate</span>
+    </a>
+    <a class="auth-header-link" th:href="@{/login}">Sign in</a>
+</header>
+<main class="auth-shell register-shell">
+    <section class="auth-intro">
+        <p class="eyebrow"><span class="eyebrow-line"></span> FIND YOUR PEOPLE</p>
+        <h1>Make this<br><span>place yours.</span></h1>
+        <p class="intro">Create your student account and get closer to campus life.</p>
+    </section>
+    <section class="auth-form-panel" aria-labelledby="register-title">
+        <h2 id="register-title">Create your account</h2>
+        <p class="form-lede">Your student details, all in one place.</p>
+        <form method="post" th:action="@{/register}" th:object="${registrationForm}">
+            <div class="form-field">
+                <label for="name">Full name</label>
+                <input id="name" th:field="*{name}" type="text" autocomplete="name" required maxlength="120">
+                <span class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+            <div class="form-field">
+                <label for="email">Email address</label>
+                <input id="email" th:field="*{email}" type="email" autocomplete="email" required maxlength="190">
+                <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input id="password" th:field="*{password}" type="password" autocomplete="new-password" required minlength="8" maxlength="72">
+                <span class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="department">Department</label>
+                    <input id="department" th:field="*{department}" type="text" autocomplete="organization-title" required maxlength="120">
+                    <span class="field-error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></span>
+                </div>
+                <div class="form-field">
+                    <label for="semester">Semester</label>
+                    <input id="semester" th:field="*{semester}" type="number" min="1" required>
+                    <span class="field-error" th:if="${#fields.hasErrors('semester')}" th:errors="*{semester}"></span>
+                </div>
+            </div>
+            <div class="form-field">
+                <label for="section">Section</label>
+                <input id="section" th:field="*{section}" type="text" required maxlength="10" autocomplete="off">
+                <span class="field-error" th:if="${#fields.hasErrors('section')}" th:errors="*{section}"></span>
+            </div>
+            <button class="auth-submit" type="submit">Create account <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="auth-switch">Already have an account? <a th:href="@{/login}">Sign in</a></p>
+    </section>
+</main>
+<footer class="site-footer auth-footer"><span>© 2026 Campus mate</span><a href="/">Back to home</a></footer>
+</body>
+</html>

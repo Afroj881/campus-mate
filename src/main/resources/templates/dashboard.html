@@ -1,4 +1,163 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Student Dashboard | Campus Mate</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
-<body class="dashboard-page"><main class="dashboard-card"><header class="dashboard-header"><div><p class="eyebrow">STUDENT PORTAL</p><h1>Student Dashboard</h1><p>Welcome, <strong th:text="${student.name}">Student</strong></p></div><form th:action="@{/logout}" method="post"><button class="button secondary" type="submit">Log out</button></form></header>
-<p><a class="button" th:href="@{/notices}">View campus notices</a></p><section class="profile-grid" aria-label="Student account information"><article><span>EMAIL</span><strong th:text="${student.email}">student@example.test</strong></article><article><span>DEPARTMENT</span><strong th:text="${student.department}">Department</strong></article><article><span>SEMESTER</span><strong th:text="${student.semester}">1</strong></article></section>
-<footer>Campus Mate � Student Portal</footer></main></body></html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | Campus mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" aria-label="Student navigation">
+            <a class="dashboard-brand" href="#overview" aria-label="Campus Mate Student Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span>
+            </a>
+
+            <p class="dashboard-nav-label">Workspace</p>
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <a class="dashboard-nav-link is-active" href="#overview"><span class="dashboard-nav-icon" aria-hidden="true">01</span>Dashboard</a>
+                <a class="dashboard-nav-link" th:href="@{/timetable}"><span class="dashboard-nav-icon" aria-hidden="true">02</span>Timetable</a>
+                <a class="dashboard-nav-link" th:href="@{/planner}"><span class="dashboard-nav-icon" aria-hidden="true">03</span>Academic Planner</a>
+                <a class="dashboard-nav-link" th:href="@{/notices}"><span class="dashboard-nav-icon" aria-hidden="true">04</span>Notices</a>
+                <a class="dashboard-nav-link" th:href="@{/events}"><span class="dashboard-nav-icon" aria-hidden="true">05</span>Events</a>
+                <a class="dashboard-nav-link" th:href="@{/calendar}"><span class="dashboard-nav-icon" aria-hidden="true">06</span>Academic Calendar</a>
+                <a class="dashboard-nav-link" th:href="@{/clubs}"><span class="dashboard-nav-icon" aria-hidden="true">07</span>Clubs</a>
+                <a class="dashboard-nav-link" th:href="@{/resources}"><span class="dashboard-nav-icon" aria-hidden="true">08</span>Resources</a>
+                <a class="dashboard-nav-link" th:href="@{/search}"><span class="dashboard-nav-icon" aria-hidden="true">09</span>Search</a>
+                <a class="dashboard-nav-link" th:href="@{/profile}"><span class="dashboard-nav-icon" aria-hidden="true">10</span>Profile</a>
+            </nav>
+
+            <div class="dashboard-sidebar-bottom">
+                <div class="sidebar-student">
+                    <span class="student-avatar" aria-hidden="true">S</span>
+                    <span class="sidebar-student-copy"><strong th:text="${userName}">Student</strong><small>Student account</small></span>
+                </div>
+                <form class="dashboard-logout-form" th:action="@{/logout}" method="post">
+                    <button class="dashboard-logout" type="submit"><span aria-hidden="true">↗</span>Logout</button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="dashboard-main" id="overview">
+            <header class="dashboard-header">
+                <div>
+                    <p class="dashboard-eyebrow">STUDENT PORTAL <span aria-hidden="true">/</span> OVERVIEW</p>
+                    <h1>Student Dashboard</h1>
+                    <p class="dashboard-welcome" th:if="${userName != null}">Welcome, <strong th:text="${userName}">Student</strong></p>
+                </div>
+                <div class="dashboard-identity">
+                    <span class="identity-label">STUDENT EMAIL</span>
+                    <span class="identity-email" th:text="${userName}">student@campusmate.edu</span>
+                </div>
+            </header>
+
+            <section class="dashboard-summary" aria-label="Dashboard summary">
+                <article class="summary-card summary-blue">
+                    <div class="summary-card-top"><span>Today's Classes</span><span class="summary-symbol" aria-hidden="true">T</span></div>
+                    <strong class="summary-value" th:text="${#lists.size(todayTimetable)}">0</strong>
+                    <span class="summary-caption" th:if="${#lists.isEmpty(todayTimetable)}">No classes scheduled for today.</span>
+                    <span class="summary-caption" th:if="${!#lists.isEmpty(todayTimetable)}">Classes scheduled today</span>
+                </article>
+                <article class="summary-card summary-sky">
+                    <div class="summary-card-top"><span>Pending Tasks</span><span class="summary-symbol" aria-hidden="true">P</span></div>
+                    <strong class="summary-value" th:text="${pendingTaskCount}">0</strong>
+                    <span class="summary-caption" th:if="${pendingTaskCount == 0}">No pending tasks.</span>
+                    <span class="summary-caption" th:if="${pendingTaskCount > 0}">Pending student tasks</span>
+                </article>
+                <article class="summary-card summary-indigo">
+                    <div class="summary-card-top"><span>Latest Notices</span><span class="summary-symbol" aria-hidden="true">N</span></div>
+                    <strong class="summary-value" th:text="${noticeCount}">0</strong>
+                    <span class="summary-caption" th:if="${noticeCount == 0}">No notices available.</span>
+                    <span class="summary-caption" th:if="${noticeCount > 0}">Notices on campus</span>
+                </article>
+                <article class="summary-card summary-cyan">
+                    <div class="summary-card-top"><span>Upcoming Events</span><span class="summary-symbol" aria-hidden="true">E</span></div>
+                    <strong class="summary-value" th:text="${upcomingEventCount}">0</strong>
+                    <span class="summary-caption" th:if="${#lists.isEmpty(upcomingEvents)}">No upcoming events.</span>
+                    <span class="summary-caption" th:if="${!#lists.isEmpty(upcomingEvents)}">Upcoming on campus</span>
+                </article>
+            </section>
+
+            <section class="dashboard-content-grid" aria-label="Student updates">
+                <article class="dashboard-panel timetable-panel" id="timetable">
+                    <div class="panel-heading"><div><p class="panel-kicker">YOUR SCHEDULE</p><h2>Today's Timetable</h2></div><span class="panel-date">TODAY</span></div>
+                    <div class="notice-preview-list" th:if="${!#lists.isEmpty(todayTimetable)}">
+                        <a class="notice-preview" th:each="entry : ${todayTimetable}" th:href="@{/timetable}">
+                            <span class="notice-preview-date" th:text="${#temporals.format(entry.startTime, 'HH:mm')}">09:00</span>
+                            <span class="notice-preview-copy">
+                                <strong th:text="${entry.subject}">Subject</strong>
+                                <small><span th:text="${entry.faculty}">Faculty</span> · <span th:text="${entry.room}">Room</span></small>
+                                <span class="notice-preview-description"><span th:text="${#temporals.format(entry.startTime, 'HH:mm')}">09:00</span> - <span th:text="${#temporals.format(entry.endTime, 'HH:mm')}">10:00</span></span>
+                            </span>
+                        </a>
+                        <a class="notice-view-all" th:href="@{/timetable}">View full timetable</a>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(todayTimetable)}"><span class="empty-state-mark" aria-hidden="true">T</span><strong>No classes scheduled for today.</strong></div>
+                </article>
+
+                <article class="dashboard-panel" id="planner">
+                    <div class="panel-heading"><div><p class="panel-kicker">STAY ON TRACK</p><h2>Pending Tasks</h2></div><span class="panel-count" th:text="${pendingTaskCount}">0</span></div>
+                    <div class="notice-preview-list" th:if="${!#lists.isEmpty(pendingTasks)}">
+                        <a class="notice-preview" th:each="task : ${pendingTasks}" th:href="@{/planner}">
+                            <span class="notice-preview-date" th:text="${#temporals.format(task.deadline, 'dd MMM')}">01 Jan</span>
+                            <span class="notice-preview-copy">
+                                <strong th:text="${task.title}">Task title</strong>
+                                <small><span th:text="${task.type}">Assignment</span> · <span th:text="${task.statusLabel}">Pending</span></small>
+                                <span class="notice-preview-description" th:text="${task.description}">Task description</span>
+                            </span>
+                        </a>
+                        <a class="notice-view-all" th:href="@{/planner}">View all tasks</a>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(pendingTasks)}"><span class="empty-state-mark" aria-hidden="true">P</span><strong>No pending tasks.</strong></div>
+                </article>
+
+
+                <article class="dashboard-panel" id="notices">
+                    <div class="panel-heading"><div><p class="panel-kicker">CAMPUS BULLETIN</p><h2>Latest Notices</h2></div><span class="panel-count" th:text="${noticeCount}">0</span></div>
+                    <div class="notice-preview-list" th:if="${!#lists.isEmpty(latestNotices)}">
+                        <a class="notice-preview" th:each="notice : ${latestNotices}" th:href="@{/notices}">
+                            <span class="notice-preview-date" th:text="${#temporals.format(notice.date, 'dd MMM')}">01 Jan</span>
+                            <span class="notice-preview-copy">
+                                <strong th:text="${notice.title}">Notice title</strong>
+                                <small th:text="${notice.category}">Category</small>
+                                <span class="notice-preview-description" th:text="${notice.description}">Notice details</span>
+                            </span>
+                        </a>
+                        <a class="notice-view-all" th:href="@{/notices}">View all notices</a>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(latestNotices)}"><span class="empty-state-mark" aria-hidden="true">N</span><strong>No notices available.</strong></div>
+                </article>
+
+                <article class="dashboard-panel" id="events">
+                    <div class="panel-heading"><div><p class="panel-kicker">WHAT'S HAPPENING</p><h2>Upcoming Events</h2></div><span class="panel-count" th:text="${upcomingEventCount}">0</span></div>
+                    <div class="notice-preview-list" th:if="${!#lists.isEmpty(upcomingEvents)}">
+                        <a class="notice-preview" th:each="event : ${upcomingEvents}" th:href="@{/events}">
+                            <span class="notice-preview-date" th:text="${#temporals.format(event.date, 'dd MMM')}">01 Jan</span>
+                            <span class="notice-preview-copy">
+                                <strong th:text="${event.title}">Event title</strong>
+                                <small><span th:text="${#temporals.format(event.time, 'HH:mm')}">09:00</span> · <span th:text="${event.venue}">Venue</span></small>
+                                <span class="notice-preview-description" th:text="${event.description}">Event details</span>
+                            </span>
+                        </a>
+                        <a class="notice-view-all" th:href="@{/events}">View all events</a>
+                    </div>
+                    <div class="empty-state" th:if="${#lists.isEmpty(upcomingEvents)}"><span class="empty-state-mark" aria-hidden="true">E</span><strong>No upcoming events.</strong></div>
+                </article>
+
+                <article class="dashboard-panel campus-panel" id="clubs">
+                    <div class="panel-heading"><div><p class="panel-kicker">GET INVOLVED</p><h2>Clubs</h2></div></div>
+                    <div class="empty-state compact-empty"><strong>Discover student clubs and coordinators</strong><a class="notice-view-all" th:href="@{/clubs}">Explore all clubs</a></div>
+                </article>
+
+                <article class="dashboard-panel campus-panel" id="resources">
+                    <div class="panel-heading"><div><p class="panel-kicker">STUDY SUPPORT</p><h2>Resources</h2></div></div>
+                    <div class="empty-state compact-empty"><strong>Study materials for your courses</strong><a class="notice-view-all" th:href="@{/resources}">Explore resources</a></div>
+                </article>
+            </section>
+
+            <footer class="dashboard-footer"><span>Campus Mate</span><span>Student Portal</span></footer>
+        </main>
+    </div>
+</body>
+</html>
