@@ -8,6 +8,7 @@ application-*.local.properties
 # Build output and Java artifacts
 target/
 *.class
+/uploads/
 
 # IDE and operating system files
 .idea/
