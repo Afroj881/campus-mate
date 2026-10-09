@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Campus Clubs | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+    <main class="student-notices-main">
+        <header class="student-notices-header">
+            <a class="dashboard-brand" th:href="@{/dashboard}" aria-label="Student Dashboard"><span class="dashboard-brand-mark" aria-hidden="true">CM</span><span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span></a>
+            <a class="notices-back-link" th:href="@{/dashboard}">Back to dashboard</a>
+        </header>
+        <section class="student-notices-intro"><p class="dashboard-eyebrow">CAMPUS COMMUNITY</p><h1>Clubs</h1><p>Explore clubs and their coordinators.</p></section>
+        <section class="student-notice-list" aria-label="Campus clubs" th:if="${!#lists.isEmpty(clubs)}">
+            <article class="student-notice-card" th:each="club : ${clubs}">
+                <h2 th:text="${club.name}">Club name</h2>
+                <p th:text="${club.description}">Club description</p>
+                <p><strong>Faculty Coordinator:</strong> <span th:text="${club.facultyCoordinator}">Faculty coordinator</span></p>
+                <p><strong>Student Coordinator:</strong> <span th:text="${club.studentCoordinator}">Student coordinator</span></p>
+                <p><strong>Contact:</strong> <span th:text="${club.contact}">Contact</span></p>
+            </article>
+        </section>
+        <div class="empty-state student-notices-empty" th:if="${#lists.isEmpty(clubs)}"><span class="empty-state-mark" aria-hidden="true">C</span><strong>No clubs available.</strong></div>
+    </main>
+</body>
+</html>

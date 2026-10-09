@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resources | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+    <main class="student-notices-main">
+        <header class="student-notices-header">
+            <a class="dashboard-brand" th:href="@{/dashboard}" aria-label="Student Dashboard"><span class="dashboard-brand-mark" aria-hidden="true">CM</span><span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span></a>
+            <a class="notices-back-link" th:href="@{/dashboard}">Back to dashboard</a>
+        </header>
+        <section class="student-notices-intro"><p class="dashboard-eyebrow">STUDY SUPPORT</p><h1>Resources</h1><p>Study materials shared for your subjects.</p></section>
+        <section class="student-notice-list" aria-label="Study resources" th:if="${!#lists.isEmpty(resources)}">
+            <article class="student-notice-card" th:each="resource : ${resources}">
+                <p class="dashboard-eyebrow" th:text="${resource.subject}">Subject</p>
+                <h2 th:text="${resource.title}">Resource title</h2>
+                <p th:text="${resource.description}">Resource description</p>
+                <p th:if="${resource.department != null or resource.semester != null or resource.section != null}">
+                    <strong>For:</strong>
+                    <span th:if="${resource.department != null}" th:text="${resource.department}">Department</span>
+                    <span th:if="${resource.semester != null}" th:text="${' · Semester ' + resource.semester}">Semester</span>
+                    <span th:if="${resource.section != null}" th:text="${' · Section ' + resource.section}">Section</span>
+                </p>
+                <a class="admin-action-button" th:if="${resource.url != null and (#strings.startsWith(#strings.toLowerCase(resource.url), 'http://') or #strings.startsWith(#strings.toLowerCase(resource.url), 'https://'))}" th:href="${resource.url}" target="_blank" rel="noopener noreferrer">Open Resource</a>
+            </article>
+        </section>
+        <section class="student-notice-list" aria-label="Teacher notes" th:if="${!#lists.isEmpty(noteResources)}">
+            <article class="student-notice-card" th:each="resource : ${noteResources}">
+                <p class="dashboard-eyebrow" th:text="${resource.subject + ' · ' + resource.department + ' · Semester ' + resource.semester + ' · Section ' + resource.section}">Subject and class</p>
+                <h2 th:text="${resource.title}">Teacher note</h2>
+                <p th:text="${resource.description}">Description</p>
+                <p><strong>Teacher:</strong> <span th:text="${resource.uploadedBy.name}">Teacher</span></p>
+                <p><strong>File:</strong> <span th:text="${resource.originalFilename}">Notes.pdf</span> · <span th:text="${#numbers.formatDecimal(resource.fileSize / 1024.0, 1, 1) + ' KB'}">File size</span></p>
+                <p><strong>Uploaded:</strong> <time th:text="${#temporals.format(resource.createdAt, 'dd MMM yyyy')}">Date</time></p>
+                <a class="admin-action-button" th:href="@{/resources/{id}/download(id=${resource.id})}">Download Notes</a>
+            </article>
+        </section>
+        <div class="empty-state student-notices-empty" th:if="${#lists.isEmpty(resources) and #lists.isEmpty(noteResources)}"><span class="empty-state-mark" aria-hidden="true">R</span><strong>No resources available.</strong></div>
+    </main>
+</body>
+</html>

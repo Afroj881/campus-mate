@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageHeading} + ' | Campus Mate'">Timetable Entry | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-dashboard">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" aria-label="Admin navigation">
+            <a class="dashboard-brand" th:href="@{/dashboard/admin}" aria-label="Campus Mate Admin Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+            </a>
+            <p class="dashboard-nav-label">Workspace</p>
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <a class="dashboard-nav-link" th:href="@{/dashboard/admin}"><span class="dashboard-nav-icon" aria-hidden="true">D</span>Dashboard</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/notices}"><span class="dashboard-nav-icon" aria-hidden="true">N</span>Notices</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/events}"><span class="dashboard-nav-icon" aria-hidden="true">E</span>Events</a>
+                <a class="dashboard-nav-link is-active" th:href="@{/admin/timetable}"><span class="dashboard-nav-icon" aria-hidden="true">T</span>Timetable</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/clubs}"><span class="dashboard-nav-icon" aria-hidden="true">C</span>Clubs</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/resources}"><span class="dashboard-nav-icon" aria-hidden="true">R</span>Resources</a>
+            </nav>
+            <div class="dashboard-sidebar-bottom">
+                <div class="sidebar-student admin-sidebar-user"><span class="student-avatar" aria-hidden="true">A</span><span class="sidebar-student-copy"><strong>Administrator</strong><small>Admin account</small></span></div>
+                <form class="dashboard-logout-form" th:action="@{/logout}" method="post">
+                    <button class="dashboard-logout" type="submit"><span aria-hidden="true">↗</span>Logout</button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="dashboard-eyebrow">CAMPUS MATE <span aria-hidden="true">/</span> TIMETABLE</p>
+                    <h1 th:text="${pageHeading}">Add Timetable Entry</h1>
+                </div>
+            </header>
+
+            <section class="dashboard-panel notice-form-panel" aria-label="Timetable entry details">
+                <div class="panel-heading"><div><p class="panel-kicker">CLASS SCHEDULE</p><h2>Entry details</h2></div></div>
+                <form class="notice-form" th:object="${timetableEntry}" th:action="@{${timetableAction}}" method="post">
+                    <div class="notice-form-error-summary" th:if="${#fields.hasErrors('*')}">Please correct the highlighted fields and try again.</div>
+                    <div class="notice-form-field">
+                        <label for="day">Day</label>
+                        <select id="day" th:field="*{day}" required>
+                            <option value="">Select a day</option>
+                            <option th:each="day : ${days}" th:value="${day}" th:text="${#strings.capitalize(#strings.toLowerCase(day.name()))}">Monday</option>
+                        </select>
+                        <span class="notice-field-error" th:if="${#fields.hasErrors('day')}" th:errors="*{day}">Day is required.</span>
+                    </div>
+                    <div class="notice-form-field">
+                        <label for="subject">Subject</label>
+                        <input id="subject" type="text" th:field="*{subject}" required>
+                        <span class="notice-field-error" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">Subject is required.</span>
+                    </div>
+                    <div class="notice-form-row">
+                        <div class="notice-form-field">
+                            <label for="faculty">Faculty</label>
+                            <input id="faculty" type="text" th:field="*{faculty}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('faculty')}" th:errors="*{faculty}">Faculty is required.</span>
+                        </div>
+                        <div class="notice-form-field">
+                            <label for="room">Room</label>
+                            <input id="room" type="text" th:field="*{room}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('room')}" th:errors="*{room}">Room is required.</span>
+                        </div>
+                    </div>
+                    <div class="notice-form-row">
+                        <div class="notice-form-field">
+                            <label for="startTime">Start Time</label>
+                            <input id="startTime" type="time" th:field="*{startTime}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Start time is required.</span>
+                        </div>
+                        <div class="notice-form-field">
+                            <label for="endTime">End Time</label>
+                            <input id="endTime" type="time" th:field="*{endTime}" required>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">End time is required.</span>
+                            <span class="notice-field-error" th:if="${#fields.hasErrors('endTimeValid')}" th:errors="*{endTimeValid}">End time must not be earlier than start time.</span>
+                        </div>
+                    </div>
+                    <div class="notice-form-actions">
+                        <button class="notice-save-button" type="submit">Save</button>
+                        <a class="notice-cancel-button" th:href="@{/admin/timetable}">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

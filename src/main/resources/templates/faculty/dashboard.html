@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Faculty Dashboard | Campus mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard">
+<div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+        <a class="dashboard-brand" href="#overview">
+            <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+            <span class="dashboard-brand-copy">Campus Mate<small>FACULTY PORTAL</small></span>
+        </a>
+        <nav class="dashboard-nav" aria-label="Faculty navigation">
+            <a class="dashboard-nav-link is-active" th:href="@{/faculty/dashboard}"><span class="dashboard-nav-icon" aria-hidden="true">01</span>Dashboard</a>
+            <a class="dashboard-nav-link" th:href="@{/calendar}"><span class="dashboard-nav-icon" aria-hidden="true">02</span>Academic Calendar</a>
+            <a class="dashboard-nav-link" th:href="@{/faculty/resources}"><span class="dashboard-nav-icon" aria-hidden="true">03</span>Upload Notes</a>
+        </nav>
+        <div class="dashboard-sidebar-bottom">
+            <div class="sidebar-student">
+                <span class="student-avatar" aria-hidden="true">F</span>
+                <span class="sidebar-student-copy"><strong th:text="${facultyName}">Faculty</strong><small>Faculty account</small></span>
+            </div>
+            <form class="dashboard-logout-form" th:action="@{/logout}" method="post">
+                <button class="dashboard-logout" type="submit"><span aria-hidden="true">↗</span>Logout</button>
+            </form>
+        </div>
+    </aside>
+    <main class="dashboard-main" id="overview">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-eyebrow">FACULTY PORTAL <span aria-hidden="true">/</span> OVERVIEW</p>
+                <h1>Faculty Dashboard</h1>
+                <p class="dashboard-welcome">Welcome, <strong th:text="${facultyName}">Faculty</strong></p>
+            </div>
+        </header>
+        <section class="dashboard-content-grid">
+            <article class="dashboard-panel">
+                <div class="panel-heading"><div><p class="panel-kicker">PROFILE</p><h2>Faculty Details</h2></div></div>
+                <p><strong>Name:</strong> <span th:text="${facultyName}">Faculty</span></p>
+                <p><strong>Department:</strong> <span th:text="${department}">Department</span></p>
+            </article>
+            <article class="dashboard-panel">
+                <div class="panel-heading"><div><p class="panel-kicker">TEACHING</p><h2>Assigned Classes</h2></div></div>
+                <div th:if="${!#lists.isEmpty(facultyAssignments)}">
+                    <ul class="notice-preview-list">
+                        <li class="notice-preview" th:each="assignment : ${facultyAssignments}">
+                            <span class="notice-preview-copy">
+                                <strong th:text="${assignment.subject.name}">Subject</strong>
+                                <small th:text="${assignment.department + ' · Semester ' + assignment.semester + ' · Section ' + assignment.section}">Department</small>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="empty-state" th:if="${#lists.isEmpty(facultyAssignments)}"><strong>No teaching assignments assigned yet.</strong></div>
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageHeading} + ' | Campus Mate'">Club | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-dashboard">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" aria-label="Admin navigation">
+            <a class="dashboard-brand" th:href="@{/dashboard/admin}" aria-label="Campus Mate Admin Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>ADMIN PORTAL</small></span>
+            </a>
+            <p class="dashboard-nav-label">Workspace</p>
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <a class="dashboard-nav-link" th:href="@{/dashboard/admin}"><span class="dashboard-nav-icon" aria-hidden="true">D</span>Dashboard</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/notices}"><span class="dashboard-nav-icon" aria-hidden="true">N</span>Notices</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/events}"><span class="dashboard-nav-icon" aria-hidden="true">E</span>Events</a>
+                <a class="dashboard-nav-link" th:href="@{/admin/timetable}"><span class="dashboard-nav-icon" aria-hidden="true">T</span>Timetable</a>
+                <a class="dashboard-nav-link is-active" th:href="@{/admin/clubs}"><span class="dashboard-nav-icon" aria-hidden="true">C</span>Clubs</a>
+            </nav>
+            <div class="dashboard-sidebar-bottom">
+                <div class="sidebar-student admin-sidebar-user"><span class="student-avatar" aria-hidden="true">A</span><span class="sidebar-student-copy"><strong>Administrator</strong><small>Admin account</small></span></div>
+                <form class="dashboard-logout-form" th:action="@{/logout}" method="post"><button class="dashboard-logout" type="submit"><span aria-hidden="true">↗</span>Logout</button></form>
+            </div>
+        </aside>
+        <main class="dashboard-main">
+            <header class="dashboard-header"><div><p class="dashboard-eyebrow">CAMPUS MATE <span aria-hidden="true">/</span> CLUBS</p><h1 th:text="${pageHeading}">Add Club</h1></div></header>
+            <section class="dashboard-panel notice-form-panel" aria-label="Club details">
+                <div class="panel-heading"><div><p class="panel-kicker">CAMPUS COMMUNITY</p><h2>Club details</h2></div></div>
+                <form class="notice-form" th:object="${club}" th:action="@{${clubAction}}" method="post">
+                    <div class="notice-form-error-summary" th:if="${#fields.hasErrors('*')}">Please correct the highlighted fields and try again.</div>
+                    <div class="notice-form-field"><label for="name">Club Name</label><input id="name" type="text" th:field="*{name}" maxlength="160" required><span class="notice-field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Club name is required.</span></div>
+                    <div class="notice-form-field"><label for="description">Description</label><textarea id="description" rows="5" th:field="*{description}" required></textarea><span class="notice-field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description is required.</span></div>
+                    <div class="notice-form-row">
+                        <div class="notice-form-field"><label for="facultyCoordinator">Faculty Coordinator</label><input id="facultyCoordinator" type="text" th:field="*{facultyCoordinator}" maxlength="160" required><span class="notice-field-error" th:if="${#fields.hasErrors('facultyCoordinator')}" th:errors="*{facultyCoordinator}">Faculty coordinator is required.</span></div>
+                        <div class="notice-form-field"><label for="studentCoordinator">Student Coordinator</label><input id="studentCoordinator" type="text" th:field="*{studentCoordinator}" maxlength="160" required><span class="notice-field-error" th:if="${#fields.hasErrors('studentCoordinator')}" th:errors="*{studentCoordinator}">Student coordinator is required.</span></div>
+                    </div>
+                    <div class="notice-form-field"><label for="contact">Contact</label><input id="contact" type="text" th:field="*{contact}" maxlength="190" required><span class="notice-field-error" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">Contact is required.</span></div>
+                    <div class="notice-form-actions"><button class="notice-save-button" type="submit">Save Club</button><a class="notice-cancel-button" th:href="@{/admin/clubs}">Cancel</a></div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

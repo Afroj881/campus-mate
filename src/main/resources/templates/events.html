@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Campus Events | Campus Mate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="student-dashboard student-notices-page">
+    <main class="student-notices-main">
+        <header class="student-notices-header">
+            <a class="dashboard-brand" th:href="@{/dashboard}" aria-label="Campus Mate Student Dashboard">
+                <span class="dashboard-brand-mark" aria-hidden="true">CM</span>
+                <span class="dashboard-brand-copy">Campus Mate<small>STUDENT PORTAL</small></span>
+            </a>
+            <a class="notices-back-link" th:href="@{/dashboard}">Back to dashboard</a>
+        </header>
+        <section class="student-notices-intro">
+            <p class="dashboard-eyebrow">STUDENT PORTAL <span aria-hidden="true">/</span> CAMPUS CALENDAR</p>
+            <h1>Campus Events</h1>
+            <p>Upcoming events from across campus.</p>
+        </section>
+        <section class="student-notice-list" aria-label="Upcoming events" th:if="${!#lists.isEmpty(events)}">
+            <article class="student-notice-card" th:each="event : ${events}">
+                <div class="student-notice-card-top">
+                    <span class="notice-category" th:text="${event.venue}">Venue</span>
+                    <span class="student-notice-date"><span th:text="${#temporals.format(event.date, 'dd MMM yyyy')}">01 Jan 2026</span> · <span th:text="${#temporals.format(event.time, 'HH:mm')}">09:00</span></span>
+                </div>
+                <h2 th:text="${event.title}">Event title</h2>
+                <p th:text="${event.description}">Event description</p>
+                <p class="event-organizer">Organized by <strong th:text="${event.organizer}">Campus Mate</strong></p>
+            </article>
+        </section>
+        <div class="empty-state student-notices-empty" th:if="${#lists.isEmpty(events)}">
+            <span class="empty-state-mark" aria-hidden="true">E</span>
+            <strong>No upcoming events.</strong>
+        </div>
+    </main>
+</body>
+</html>
