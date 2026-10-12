@@ -1,23 +1,14 @@
 # 🎓 Campus Mate
 ### Centralized College Information & Student Assistance Platform
 
-Campus Mate is a web-based college management and student assistance platform designed to bring important college information and academic tools into one centralized system.
+<p align="center">
+  <b>A centralized digital platform for college information, academic organization, and student assistance.</b>
+</p>
 
-The project aims to simplify access to college notices, events, timetables, academic resources, and student productivity tools through a role-based web application.
-
-It provides separate access for Students, Faculty/Teachers, and Administrators, helping organize academic information and campus activities in one place.
-
----
-
-## 🌐 Live Demo
-
-**Live Application:**  
-https://campus-mate-project.onrender.com
-
-**GitHub Repository:**  
-https://github.com/Afroj881/campus-mate-project
-
-> Note: The application is hosted on Render. On a free hosting instance, the first request after inactivity may take additional time while the service starts.
+<p align="center">
+  <a href="https://campus-mate-project.onrender.com">🌐 Live Demo</a> •
+  <a href="https://github.com/Afroj881/campus-mate-project">💻 GitHub Repository</a>
+</p>
 
 ---
 
@@ -26,156 +17,185 @@ https://github.com/Afroj881/campus-mate-project
 - [Project Overview](#-project-overview)
 - [Problem Statement](#-problem-statement)
 - [Project Objectives](#-project-objectives)
-- [Features](#-features)
+- [Key Features](#-key-features)
 - [User Roles](#-user-roles)
 - [Software Requirements Specification](#-software-requirements-specification)
 - [Technology Stack](#-technology-stack)
 - [System Architecture](#-system-architecture)
 - [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
+- [Installation and Setup](#-installation-and-setup)
 - [Environment Configuration](#-environment-configuration)
 - [Database Configuration](#-database-configuration)
 - [Application Workflow](#-application-workflow)
 - [Testing](#-testing)
 - [Deployment](#-deployment)
 - [Team Members](#-team-members)
-- [Project Development Roadmap](#-project-development-roadmap)
+- [Weekly Development and Team Contributions](#-weekly-development-and-team-contributions)
 - [Limitations](#-limitations)
 - [Future Scope](#-future-scope)
 - [Conclusion](#-conclusion)
+- [Acknowledgements](#-acknowledgements)
 
 ---
 
 ## 📖 Project Overview
 
-Campus Mate is developed to provide a centralized digital platform for college students and faculty.
+**Campus Mate** is a Java-based web application designed to provide a centralized platform for college information and student assistance.
 
-In many colleges, information such as notices, academic schedules, events, and learning resources may be distributed across different channels. Students may need to visit multiple places to find the information they need.
+Students and faculty often need to access academic information, notices, events, timetables, and learning resources through different channels. Campus Mate aims to simplify this process by organizing supported information and academic tools in one web application.
 
-Campus Mate aims to make this process simpler by organizing relevant academic information and student assistance features within a single web application.
+The platform is designed around three primary user roles:
 
-The application uses Java and Spring Boot for backend development, Thymeleaf for server-rendered pages, and MySQL for data persistence.
+- Student
+- Faculty / Teacher
+- Administrator
+
+The application uses Java and Spring Boot for backend development, Thymeleaf for server-side page rendering, and MySQL for database management.
+
+The project focuses on improving accessibility, organizing academic information, and providing role-based access to supported application features.
 
 ### Project Information
 
 | Attribute | Details |
 |---|---|
 | Project Name | Campus Mate |
-| Project Type | Web Application |
-| Domain | College Information & Student Assistance |
+| Project Category | Web Application |
+| Project Domain | College Information and Student Assistance |
 | Institution | Arya College of Engineering & IT |
 | Department | Artificial Intelligence & Data Science |
-| Backend | Java, Spring Boot |
-| Frontend | Thymeleaf, HTML, CSS, JavaScript |
+| Programming Language | Java |
+| Backend Framework | Spring Boot |
+| Frontend Technology | Thymeleaf, HTML, CSS, JavaScript |
 | Database | MySQL |
 | Build Tool | Maven |
-| Repository | GitHub |
-| Hosting | Render |
+| Version Control | Git |
+| Source Code Hosting | GitHub |
+| Deployment Platform | Render |
 
 ---
 
 ## ❗ Problem Statement
 
-Students and faculty regularly need access to academic schedules, college announcements, events, and learning resources.
+College students frequently need information about academic schedules, notices, events, and learning resources.
 
-When information is scattered across different platforms, users may experience difficulties finding updated information and organizing academic activities.
+When this information is distributed across multiple platforms, students may find it difficult to locate relevant information and organize their academic activities.
 
-Campus Mate addresses this problem by providing a centralized web application with role-based access and organized campus information.
+Faculty members and administrators also need organized workflows for managing supported academic and campus information.
 
-### Key Problems
+Campus Mate aims to address these challenges through a centralized digital platform with role-based access and organized application modules.
 
-- Difficulty accessing college information from one place.
-- Lack of centralized access to notices and event information.
-- Difficulty organizing personal academic tasks.
-- Need for role-specific access for students, faculty, and administrators.
-- Need for a structured platform to organize academic resources.
+### Problems Addressed
+
+- College information may be distributed across different channels.
+- Students may have difficulty finding relevant academic information.
+- Academic activities and personal tasks can be difficult to organize.
+- Different user roles require different access permissions.
+- Campus notices and event information need organized management.
+- Academic resources benefit from centralized access.
 
 ---
 
 ## 🎯 Project Objectives
 
-The main objectives of Campus Mate are:
+The primary objectives of Campus Mate are:
 
 1. Develop a centralized college information platform.
-2. Provide authentication and role-based access.
+2. Implement authentication and role-based authorization.
 3. Organize college notices and events.
-4. Provide access to timetable and academic information.
-5. Support personal academic planning.
+4. Provide access to supported academic information.
+5. Support student academic planning.
 6. Organize campus clubs and learning resources.
-7. Support faculty and administrator workflows.
-8. Maintain application data using a relational database.
-9. Provide a user-friendly web interface.
+7. Support faculty and administrative workflows.
+8. Store application information using a relational database.
+9. Develop a user-friendly web interface.
 10. Deploy the application online for demonstration and evaluation.
+11. Apply software engineering concepts in a practical project.
+12. Maintain project documentation and development history.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-The following feature descriptions should be checked against the current implementation before being treated as completed functionality.
+The following sections describe the intended application areas. The exact functionality of each module should be verified against the current implementation.
 
 ### 🔐 1. Authentication and Authorization
 
-- User login and logout.
+The authentication system supports controlled access to the application.
+
+Relevant functionality includes:
+
+- User login.
 - Student registration.
-- Role-based access for supported user types.
-- Protected application routes.
-- Password encoding and authentication through the configured security system.
+- Role-based access control.
+- Protected application pages.
+- Authentication and authorization checks.
+- Password encoding through the configured security system.
+
+Public registration is intended for students. Faculty and administrator accounts follow the application's configured account-provisioning workflow.
 
 ### 👨‍🎓 2. Student Portal
 
-The student portal is intended to provide access to relevant academic and campus information.
+The student portal provides access to supported student-facing features.
 
-Potential areas include:
+Potential application areas include:
 
 - Student dashboard.
 - College notices.
 - College events.
 - Timetable information.
 - Academic planner.
-- Clubs and learning resources.
-- Student profile management.
+- Clubs and campus information.
+- Learning resources.
 
 ### 👨‍🏫 3. Faculty Portal
 
-The faculty portal supports faculty-specific academic workflows where implemented.
+The faculty portal provides access to supported faculty-related functionality.
 
-These may include:
+Depending on the implementation, this may include:
 
 - Faculty dashboard.
-- Subject and class-related information.
-- Assigned academic resources.
-- Notes or learning-resource management.
-- Access to relevant academic calendar information.
+- Academic information.
+- Assigned subjects or classes.
+- Learning-resource management.
+- Faculty-specific application pages.
 
-### 🛡️ 4. Administration
+### 🛡️ 4. Administrator Portal
 
-The administrator area supports management of the application’s available modules.
+The administrator portal provides access to supported management features.
 
-Depending on the implemented functionality, this may include:
+Depending on the implemented modules, administrative functionality may include:
 
 - Administrative dashboard.
 - Notice management.
 - Event management.
 - Timetable management.
-- Club and resource management.
 - Academic calendar management.
+- Club and resource management.
 - User and role-related administration.
 
-### 📅 5. Timetable and Academic Planning
+### 📢 5. Notices and Announcements
 
-The platform is intended to help students access academic schedules and organize personal tasks.
+The notices module is intended to organize important college announcements.
 
-Where implemented, the planner supports task creation, editing, completion, and deletion.
+It helps users access relevant information from a centralized location.
 
-### 📢 6. Notices and Events
+### 🎉 6. Events Management
 
-The notices and events modules organize important campus information so users can access announcements and event details from the application.
+The Events module organizes college event information.
 
-### 📚 7. Learning Resources
+The supported functionality should be verified against the current event controllers, services, repositories, and templates.
 
-The resources module is intended to organize academic learning materials.
+### 📅 7. Timetable and Academic Planning
 
-Any upload, download, or class-specific access restrictions should be documented according to the actual application code.
+The application is designed to support access to academic schedules and student planning tools.
+
+The exact capabilities should be documented according to the implemented timetable and planner modules.
+
+### 📚 8. Learning Resources
+
+The resources module is intended to organize learning materials and other relevant academic resources.
+
+Any upload, download, or role-specific access functionality should be documented only when confirmed in the source code.
 
 ---
 
@@ -183,17 +203,17 @@ Any upload, download, or class-specific access restrictions should be documented
 
 Campus Mate is designed around three primary user roles.
 
-| Role | Description |
+| User Role | Description |
 |---|---|
-| Student | Accesses student-facing campus information and supported academic tools. |
-| Faculty / Teacher | Accesses faculty-related features and permitted academic resources. |
+| Student | Accesses supported student-facing features and campus information. |
+| Faculty / Teacher | Accesses permitted faculty-related functionality and academic resources. |
 | Admin | Manages supported application modules and administrative information. |
 
-### Role-Based Access
+### Role-Based Access Control
 
-The application uses authentication and authorization mechanisms to control access to protected pages and operations.
+The application uses authentication and authorization mechanisms to restrict access to protected pages and operations.
 
-Public registration is intended for students. Faculty and administrator account creation or provisioning depends on the application's configured workflow.
+The permissions available to each role depend on the application's configured security rules.
 
 ---
 
@@ -201,32 +221,32 @@ Public registration is intended for students. Faculty and administrator account 
 
 ### Functional Requirements
 
-The system's functional requirements include the following intended capabilities:
+The application is intended to support the following requirements:
 
-1. Authenticate users.
-2. Register student accounts.
-3. Restrict access according to user roles.
-4. Display relevant campus information.
+1. Allow users to authenticate.
+2. Support student registration.
+3. Restrict protected operations according to user roles.
+4. Display supported campus information.
 5. Organize notices and events.
-6. Provide supported timetable and academic planning functionality.
-7. Organize learning resources.
-8. Support administrative management of available modules.
-9. Store application data in MySQL.
-10. Provide a browser-based interface.
+6. Provide supported academic planning functionality.
+7. Organize available learning resources.
+8. Support administrative operations for implemented modules.
+9. Persist application information in MySQL.
+10. Provide a browser-based user interface.
 
 ### Non-Functional Requirements
 
 | Requirement | Description |
 |---|---|
-| Usability | The interface should be understandable and easy to navigate. |
-| Security | Protected routes and operations should enforce authorization. |
-| Maintainability | The application should use an organized backend structure. |
-| Reliability | Application workflows should handle expected errors appropriately. |
-| Performance | Pages and database operations should respond within reasonable limits. |
-| Compatibility | The web application should be accessible through a modern browser. |
-| Data Integrity | Database operations should preserve valid application data. |
+| Usability | Provide an understandable and navigable interface. |
+| Security | Enforce authentication and authorization for protected operations. |
+| Maintainability | Organize the application into manageable components. |
+| Reliability | Handle expected application errors appropriately. |
+| Performance | Keep application and database response times reasonable. |
+| Compatibility | Support access through modern web browsers. |
+| Data Integrity | Preserve valid application data during database operations. |
 
-These are project requirements and design goals; they are not a claim that every quality attribute has been independently measured.
+These are project requirements and design goals, not independently measured performance or security guarantees.
 
 ---
 
@@ -235,10 +255,10 @@ These are project requirements and design goals; they are not a claim that every
 | Technology | Purpose |
 |---|---|
 | Java | Main programming language |
-| Spring Boot | Application framework |
+| Spring Boot | Backend application framework |
 | Spring MVC | Web request and controller handling |
 | Thymeleaf | Server-side HTML rendering |
-| HTML5 | Page structure |
+| HTML5 | Webpage structure |
 | CSS3 | Styling and layout |
 | JavaScript | Client-side interactions where implemented |
 | Spring Data JPA | Database persistence abstraction |
@@ -251,7 +271,7 @@ These are project requirements and design goals; they are not a claim that every
 | Docker | Container-based deployment configuration |
 | Render | Application hosting |
 
-Exact dependency versions should be verified in `pom.xml` and the deployment configuration.
+Exact dependency versions should be checked in `pom.xml`.
 
 ---
 
@@ -259,7 +279,7 @@ Exact dependency versions should be verified in `pom.xml` and the deployment con
 
 Campus Mate follows a Java web-application architecture using Spring Boot and server-rendered pages.
 
-The following diagram illustrates the intended request flow. Confirm the exact layers and component names against the current source code.
+The following diagram provides a high-level representation of the application.
 
 ```mermaid
 flowchart TD
@@ -269,8 +289,7 @@ flowchart TD
     D --> E[Spring Data JPA Repositories]
     E --> F[(MySQL Database)]
 
-    C --> G[Authentication and Authorization]
-    G --> D
+    G[Spring Security] --> C
 
     F --> E
     E --> D
@@ -281,9 +300,9 @@ flowchart TD
 
 ### Architecture Components
 
-**1. User Interface**
+**1. Presentation Layer**
 
-Thymeleaf templates, HTML, CSS, and JavaScript provide the browser-based interface.
+Thymeleaf templates, HTML, CSS, and JavaScript provide the web interface.
 
 **2. Controller Layer**
 
@@ -291,27 +310,27 @@ Spring MVC controllers handle incoming web requests and coordinate application o
 
 **3. Service Layer**
 
-Where present, service classes contain application logic and coordinate data operations.
+Service classes, where present, contain application logic and coordinate data operations.
 
 **4. Repository Layer**
 
-Spring Data JPA repositories provide persistence operations for supported entities.
+Spring Data JPA repositories provide database persistence operations.
 
 **5. Database Layer**
 
-MySQL stores application data.
+MySQL stores supported application data.
 
 **6. Security Layer**
 
-Spring Security manages authentication and access control according to the configured security rules.
+Spring Security manages authentication and authorization according to the configured security rules.
 
 ---
 
 ## 📁 Project Structure
 
-The project is organized as a Maven-based Spring Boot application.
+The project uses a Maven-based Spring Boot structure.
 
-A simplified structure is shown below. Use the actual repository structure as the source of truth.
+The following is a simplified example. The actual repository structure should be treated as authoritative.
 
 ```text
 campus-mate-project/
@@ -343,22 +362,22 @@ campus-mate-project/
 └── README.md
 ```
 
-> Important: Folder names and package organization may differ in the actual repository. Keep this section synchronized with the real files.
+> **Note:** Confirm the folder names and package structure against the current repository before publishing this section.
 
 ---
 
-## 🚀 Getting Started
+## 💻 Installation and Setup
 
-Follow these instructions to run Campus Mate locally.
+Follow these instructions to run the application locally.
 
 ### Prerequisites
 
-Install the following software:
+Install the following tools:
 
-- A compatible Java Development Kit.
-- Apache Maven, or use the project's Maven Wrapper if available.
+- Java Development Kit compatible with the project.
+- Apache Maven or the project's Maven Wrapper.
 - Git.
-- MySQL Server or another correctly configured MySQL instance.
+- MySQL Server or an accessible MySQL database.
 - A modern web browser.
 - An IDE such as IntelliJ IDEA, Eclipse, or Visual Studio Code.
 
@@ -368,7 +387,7 @@ Install the following software:
 git clone https://github.com/Afroj881/campus-mate-project.git
 ```
 
-### Step 2: Open the Project
+### Step 2: Open the Project Directory
 
 ```bash
 cd campus-mate-project
@@ -378,15 +397,17 @@ cd campus-mate-project
 
 Create or select a MySQL database for local development.
 
-Configure the JDBC URL, username, and password through environment variables.
+Configure the JDBC URL, username, and password using environment variables.
 
 Do not use production database credentials for local development.
 
 ### Step 4: Configure Environment Variables
 
-Set the required variables described in the Environment Configuration section.
+Set the environment variables listed in the next section.
 
-### Step 5: Build the Project
+The exact configuration should match the current `application.properties` file.
+
+### Step 5: Build the Application
 
 ```bash
 mvn clean package
@@ -398,35 +419,35 @@ mvn clean package
 mvn spring-boot:run
 ```
 
-If the application starts successfully, open the local address and port configured by the application.
+If the application starts successfully, open the local address configured by the application.
 
-For a default Spring Boot configuration, the address is commonly:
+The default Spring Boot port is commonly:
 
 ```text
 http://localhost:8080
 ```
 
-Confirm the actual port from `application.properties` or the startup logs.
+Verify the actual port from the application configuration or startup logs.
 
 ---
 
 ## 🔐 Environment Configuration
 
-Database credentials and administrator passwords must be configured securely.
+The application uses environment variables to configure its database connection and administrator account.
 
-The application configuration has used the following environment-variable names. Confirm them against the latest source code before use.
+Confirm the exact variable names in the current source code and deployment settings.
 
 | Variable | Purpose |
 |---|---|
-| `DB_URL` | JDBC connection URL for MySQL |
+| `DB_URL` | MySQL JDBC connection URL |
 | `DB_USERNAME` | MySQL username |
 | `DB_PASSWORD` | MySQL password |
-| `CAMPUSMATE_ADMIN_EMAIL` | Administrator account email, if seeding is enabled |
-| `CAMPUSMATE_ADMIN_PASSWORD` | Administrator account password, if seeding is enabled |
+| `CAMPUSMATE_ADMIN_EMAIL` | Administrator email, if account seeding is enabled |
+| `CAMPUSMATE_ADMIN_PASSWORD` | Administrator password, if account seeding is enabled |
 
 ### Example Configuration
 
-Use placeholders instead of real credentials.
+Use placeholders instead of actual credentials.
 
 ```text
 DB_URL=jdbc:mysql://localhost:3306/campus_mate
@@ -439,22 +460,23 @@ CAMPUSMATE_ADMIN_PASSWORD=replace_with_a_strong_unique_password
 
 ### Security Recommendations
 
-- Never commit production passwords to GitHub.
-- Do not publish real database connection strings containing credentials.
-- Keep private values in environment variables.
-- Use a strong, unique administrator password.
+- Never commit real passwords to GitHub.
+- Never publish database credentials.
+- Store production secrets in the hosting provider's environment settings.
+- Use strong, unique passwords.
 - Rotate credentials if they are exposed.
-- Keep local configuration files containing secrets out of version control.
+- Keep secret-containing local configuration files out of version control.
+- Do not place administrator passwords in the README.
 
 ---
 
 ## 🗄️ Database Configuration
 
-Campus Mate uses MySQL for relational data storage.
+Campus Mate uses MySQL as its relational database.
 
-Spring Data JPA and Hibernate provide database persistence and object-relational mapping.
+Spring Data JPA and Hibernate support database persistence and object-relational mapping.
 
-The application database configuration includes:
+The database configuration includes:
 
 - JDBC connection settings.
 - Database authentication.
@@ -462,86 +484,90 @@ The application database configuration includes:
 - Entity persistence.
 - Repository-based database operations.
 
-The exact database entities, relationships, and schema should be documented using the current Java entity classes and database configuration.
+The exact database schema and relationships should be documented using the current entity classes and database configuration.
 
-Do not delete or reset an existing database when configuring the project.
+**Important:** Never delete or reset an existing database simply to configure or deploy the application.
 
 ---
 
 ## 🔄 Application Workflow
 
-The following is a high-level workflow. The exact steps depend on the implemented routes and pages.
+The following workflows describe the intended high-level behavior. Actual navigation depends on the implemented controllers and pages.
 
-### User Authentication
+### Authentication Workflow
 
 1. A user opens the application.
-2. The user selects the appropriate login role where supported.
-3. The user enters their credentials.
-4. The application validates the login.
-5. The authenticated user is directed to the permitted application area.
+2. The user selects an available login role.
+3. The user enters login credentials.
+4. The application validates the credentials.
+5. The user receives access according to the assigned role and permissions.
+6. The user can log out after completing the session.
 
 ### Student Workflow
 
-1. The student logs in.
-2. The student opens the dashboard.
-3. The student accesses available campus information.
-4. The student uses supported academic tools.
-5. The student logs out when finished.
+1. The student opens the application.
+2. The student logs in.
+3. The student accesses the student dashboard.
+4. The student views available campus information.
+5. The student uses supported academic tools.
+6. The student logs out when finished.
 
 ### Faculty Workflow
 
-1. The faculty member logs in using a provisioned account.
-2. The application checks the user's role and permissions.
-3. The faculty member accesses permitted faculty features.
-4. The faculty member views or manages supported academic resources.
+1. The faculty member opens the application.
+2. The faculty member logs in using a provisioned account.
+3. The application verifies the assigned role.
+4. The faculty member accesses permitted faculty functionality.
+5. The faculty member uses supported academic-resource or management features.
 
 ### Administrator Workflow
 
-1. The administrator logs in.
-2. The application verifies administrative permissions.
-3. The administrator opens supported management modules.
-4. The administrator performs permitted content-management operations.
+1. The administrator opens the application.
+2. The administrator logs in.
+3. The application verifies administrative permissions.
+4. The administrator accesses available management modules.
+5. The administrator performs permitted administrative operations.
 
 ---
 
 ## 🧪 Testing
 
-Testing is necessary to verify that the application behaves as expected.
+Testing is important for verifying application behavior and identifying defects.
 
-### Suggested Test Areas
+### Suggested Testing Areas
 
-| Test Area | What to Verify |
+| Test Area | Verification |
 |---|---|
 | Authentication | Valid and invalid login attempts |
-| Registration | Required fields and validation |
-| Authorization | Protected pages reject unauthorized access |
-| Role Management | Each role receives the appropriate permissions |
+| Registration | Input validation and account creation |
+| Authorization | Access restrictions for protected pages |
+| Role Management | Permissions for supported user roles |
 | Database | Supported create, read, update, and delete operations |
 | Forms | Required fields and invalid input handling |
-| Navigation | Links and page transitions work correctly |
-| Deployment | Public application URL opens successfully |
+| Navigation | Page links and navigation behavior |
+| Deployment | Availability of the public application |
 
-### Running Automated Tests
+### Running Tests
 
-Use Maven to run the available test suite:
+Run the available automated tests using Maven:
 
 ```bash
 mvn test
 ```
 
-To run the build and tests together:
+To perform a full verification build:
 
 ```bash
 mvn clean verify
 ```
 
-Only report test counts, pass/fail results, and coverage when they have been verified from actual test execution.
+Only publish actual test counts, pass/fail results, or coverage percentages after verifying them from test output.
 
 ---
 
 ## ☁️ Deployment
 
-Campus Mate's source code is maintained on GitHub, and the public application is hosted on Render.
+Campus Mate's source code is maintained on GitHub, and the deployed application is hosted on Render.
 
 ### Project Links
 
@@ -550,7 +576,7 @@ Campus Mate's source code is maintained on GitHub, and the public application is
 | Live Application | https://campus-mate-project.onrender.com |
 | GitHub Repository | https://github.com/Afroj881/campus-mate-project |
 
-### Deployment Overview
+### Deployment Architecture
 
 ```mermaid
 flowchart LR
@@ -562,22 +588,32 @@ flowchart LR
     G[User Browser] --> E
 ```
 
+### Deployment Process
+
+1. Update the project source code.
+2. Verify the application locally where possible.
+3. Commit and push the intended changes to GitHub.
+4. Allow Render to build and deploy the configured branch.
+5. Check the deployment status.
+6. Review application logs if deployment fails.
+7. Open the live application and verify its behavior.
+
 ### Deployment Considerations
 
-- The application must start successfully in the hosting environment.
-- Required environment variables must be configured in the hosting dashboard.
-- The database must be reachable from the deployed application.
-- Database and administrator credentials must remain private.
-- The public URL should be checked after each relevant deployment.
-- Deployment success should be confirmed from the hosting dashboard and application logs.
+- Required environment variables must be configured.
+- The database must be accessible from the deployed application.
+- The application must bind to the port provided by the hosting environment.
+- Secrets must remain private.
+- Deployment success must be confirmed through the hosting dashboard and application logs.
+- A free hosting instance may take additional time to respond after inactivity.
 
 ---
 
 ## 👨‍💻 Team Members
 
-Campus Mate is developed by the following project team.
+Campus Mate is developed by a team of five members.
 
-| No. | Team Member | Roll Number | Role |
+| No. | Team Member | Roll Number | Assigned Role |
 |---:|---|---|---|
 | 1 | Afroj Ali | 24EARAD008 | Team Leader & Full-Stack Project Developer |
 | 2 | Harshini Choudhary | 24EARAD058 | UI/UX Designer & Frontend Developer |
@@ -587,82 +623,625 @@ Campus Mate is developed by the following project team.
 
 ### Team Responsibilities
 
-**Afroj Ali — Team Leader & Full-Stack Project Developer**
+#### 1. Afroj Ali
+**Role:** Team Leader & Full-Stack Project Developer
 
-Responsible for overall project coordination, full-stack development activities, integration, and deployment coordination.
+Primary responsibilities:
 
-**Harshini Choudhary — UI/UX Designer & Frontend Developer**
+- Project planning and coordination.
+- Full-stack development activities.
+- Backend and frontend integration.
+- Review of application workflows.
+- Deployment coordination.
+- Overall project progress monitoring.
 
-Responsible for interface design, visual consistency, usability, and frontend development activities.
+#### 2. Harshini Choudhary
+**Role:** UI/UX Designer & Frontend Developer
 
-**Ayush Saini — Database Design & Backend Support**
+Primary responsibilities:
 
-Responsible for database planning, data-model support, and backend integration activities.
+- User-interface planning.
+- UI/UX design.
+- Frontend page development.
+- Interface consistency.
+- Usability improvements.
+- Frontend verification.
 
-**Divya Joshi — Functional Module Development & Integration Support**
+#### 3. Ayush Saini
+**Role:** Database Design & Backend Support
 
-Responsible for functional module development and supporting integration between application components.
+Primary responsibilities:
 
-**Anishka Sharma — Software Testing, Quality Assurance & Documentation**
+- Database planning.
+- Data-model support.
+- Database integration.
+- Data-persistence verification.
+- Backend support.
+- Database-related issue investigation.
 
-Responsible for testing coordination, quality checks, documentation, and recording issues found during verification.
+#### 4. Divya Joshi
+**Role:** Functional Module Development & Integration Support
+
+Primary responsibilities:
+
+- Functional module development.
+- Module integration.
+- Workflow implementation support.
+- Functional verification.
+- Coordination between application components.
+
+#### 5. Anishka Sharma
+**Role:** Software Testing, Quality Assurance & Documentation
+
+Primary responsibilities:
+
+- Test-case preparation.
+- Functional testing.
+- Regression testing.
+- Issue documentation.
+- Quality-assurance support.
+- Project documentation.
 
 ---
 
-## 📅 Project Development Roadmap
+# 📅 Weekly Development and Team Contributions
 
-The project was planned as a 12-week academic development effort.
+The project follows a planned 12-week academic development timeline, from 6 July 2026 to 27 September 2026.
 
-The following table provides a high-level roadmap. Exact completion dates and weekly status should be confirmed against the team's work logs and repository history.
+The sections below provide a structured record of weekly activities. Individual activities must be verified against the team's actual work, progress reports, commits, and other project records before being treated as completed work.
 
-| Week | Planned Focus |
-|---|---|
-| Week 1 | Project research and requirement analysis |
-| Week 2 | Spring Boot foundation and database planning |
-| Week 3 | Student registration and login |
-| Week 4 | Authentication and role-based access |
-| Week 5 | Student and administrator dashboards |
-| Week 6 | Notice management |
-| Week 7 | Events management |
-| Week 8 | Timetable and academic planner |
-| Week 9 | Clubs, learning resources, and search |
-| Week 10 | Faculty features and academic calendar |
-| Week 11 | Testing, security checks, and bug fixing |
-| Week 12 | Final verification, deployment, and documentation |
+## Week 1: 6 July – 12 July 2026
 
-This roadmap represents the intended development sequence. It should not be treated as proof that every module was completed during its assigned week.
+### Focus
+Project planning and requirement analysis.
+
+### Team Contributions
+
+**Afroj Ali — Team Leader & Full-Stack Project Developer**
+- Planned the project structure and development approach.
+- Analysed initial project requirements.
+- Evaluated the proposed technology stack.
+- Planned the initial application architecture.
+
+**Harshini Choudhary — UI/UX Designer & Frontend Developer**
+- Analysed user-interface requirements.
+- Planned the initial dashboard layout.
+- Identified important interface components.
+- Considered usability and navigation requirements.
+
+**Ayush Saini — Database Design & Backend Support**
+- Analysed database requirements.
+- Identified the need for structured data storage.
+- Planned initial data entities.
+- Reviewed database integration requirements.
+
+**Divya Joshi — Functional Module Development & Integration Support**
+- Identified the main application modules.
+- Analysed functional requirements.
+- Reviewed relationships between planned modules.
+- Supported initial project planning.
+
+**Anishka Sharma — Software Testing, Quality Assurance & Documentation**
+- Prepared initial project documentation.
+- Identified areas requiring functional testing.
+- Planned initial verification activities.
+- Documented project requirements.
+
+### Expected Outcome
+A clear understanding of project requirements, technology choices, and planned modules.
+
+---
+
+## Week 2: 13 July – 19 July 2026
+
+### Focus
+Application foundation and database planning.
+
+### Team Contributions
+
+**Afroj Ali**
+- Worked on the Spring Boot project foundation.
+- Reviewed application configuration.
+- Planned the backend structure.
+- Coordinated initial development tasks.
+
+**Harshini Choudhary**
+- Planned the login-page layout.
+- Reviewed frontend structure.
+- Identified common styling requirements.
+- Planned consistent page layouts.
+
+**Ayush Saini**
+- Reviewed database configuration requirements.
+- Planned the persistence layer.
+- Identified database connectivity requirements.
+- Supported data-model planning.
+
+**Divya Joshi**
+- Reviewed authentication workflows.
+- Analysed relationships between functional modules.
+- Supported application-structure planning.
+- Identified integration requirements.
+
+**Anishka Sharma**
+- Prepared preliminary authentication test scenarios.
+- Documented expected application behavior.
+- Identified validation cases.
+- Supported project documentation.
+
+### Expected Outcome
+Initial application foundation and a plan for database connectivity and authentication.
+
+---
+
+## Week 3: 20 July – 26 July 2026
+
+### Focus
+Authentication and role-based access.
+
+### Team Contributions
+
+**Afroj Ali**
+- Worked on authentication-related backend functionality.
+- Reviewed login workflows.
+- Supported integration between security and application components.
+- Coordinated implementation activities.
+
+**Harshini Choudhary**
+- Worked on login-interface styling.
+- Planned the role-selection interface.
+- Reviewed form layout and consistency.
+- Supported frontend usability improvements.
+
+**Ayush Saini**
+- Supported user-data persistence.
+- Reviewed database integration.
+- Assisted with data-model requirements.
+- Investigated relevant persistence issues.
+
+**Divya Joshi**
+- Supported authentication workflow integration.
+- Reviewed interactions between login and application modules.
+- Helped verify functional requirements.
+- Supported integration activities.
+
+**Anishka Sharma**
+- Prepared login test scenarios.
+- Reviewed input-validation cases.
+- Checked expected role-based behavior.
+- Documented identified issues.
+
+### Expected Outcome
+Progress toward authentication, login workflows, and role-based access.
+
+---
+
+## Week 4: 27 July – 2 August 2026
+
+### Focus
+Events module development.
+
+### Team Contributions
+
+**Afroj Ali**
+- Coordinated development of the Events module.
+- Reviewed the event data structure and backend requirements.
+- Supported integration of event-related functionality.
+- Reviewed the module's expected workflow.
+
+**Harshini Choudhary**
+- Planned event-related interface layouts.
+- Reviewed visual consistency.
+- Supported event-page presentation.
+- Considered usability requirements.
+
+**Ayush Saini**
+- Supported event data-structure planning.
+- Reviewed persistence requirements.
+- Assisted with database integration.
+- Supported event-related data operations.
+
+**Divya Joshi**
+- Supported functional development of the Events module.
+- Reviewed event workflows.
+- Assisted with module integration.
+- Coordinated functional requirements.
+
+**Anishka Sharma**
+- Prepared event-related test scenarios.
+- Reviewed expected event workflows.
+- Documented possible validation issues.
+- Updated project documentation.
+
+### Expected Outcome
+Development and integration progress for the Events module.
+
+---
+
+## Week 5: 3 August – 9 August 2026
+
+### Focus
+Module integration and interface improvements.
+
+### Team Contributions
+
+**Afroj Ali**
+- Reviewed integration between available modules.
+- Coordinated application workflow improvements.
+- Investigated integration issues.
+- Reviewed overall application behavior.
+
+**Harshini Choudhary**
+- Improved interface consistency.
+- Reviewed existing page layouts.
+- Supported frontend refinements.
+- Checked visual consistency between modules.
+
+**Ayush Saini**
+- Supported database integration.
+- Reviewed persistence behavior.
+- Assisted with data-related issue investigation.
+- Supported backend integration.
+
+**Divya Joshi**
+- Supported integration between functional modules.
+- Reviewed workflows.
+- Assisted with functional improvements.
+- Helped coordinate module interactions.
+
+**Anishka Sharma**
+- Prepared integrated-feature test scenarios.
+- Reviewed application behavior.
+- Recorded identified issues.
+- Updated testing documentation.
+
+### Expected Outcome
+Improved integration between available modules and progress toward consistent application behavior.
+
+---
+
+## Week 6: 10 August – 16 August 2026
+
+### Focus
+Testing and bug fixing.
+
+### Team Contributions
+
+**Afroj Ali**
+- Reviewed application behavior.
+- Coordinated issue investigation.
+- Supported backend and integration fixes.
+- Reviewed application stability.
+
+**Harshini Choudhary**
+- Checked interface behavior.
+- Reviewed frontend consistency.
+- Identified visible interface issues.
+- Supported UI corrections.
+
+**Ayush Saini**
+- Reviewed database connectivity and persistence.
+- Investigated database-related issues.
+- Supported backend data operations.
+- Verified relevant database workflows.
+
+**Divya Joshi**
+- Reviewed functional workflows.
+- Supported integration issue resolution.
+- Checked interactions between available modules.
+- Assisted with functional verification.
+
+**Anishka Sharma**
+- Prepared and executed available test cases.
+- Recorded defects.
+- Supported regression testing.
+- Updated quality-assurance documentation.
+
+### Expected Outcome
+Identification and resolution of issues discovered during application verification.
+
+---
+
+## Week 7: 17 August – 23 August 2026
+
+### Focus
+Functional improvements and integration.
+
+### Team Contributions
+
+**Afroj Ali**
+- Coordinated planned feature improvements.
+- Reviewed backend integration.
+- Supported application workflow refinement.
+- Monitored development progress.
+
+**Harshini Choudhary**
+- Reviewed frontend presentation.
+- Supported UI refinements.
+- Checked navigation consistency.
+- Assisted with interface improvements.
+
+**Ayush Saini**
+- Supported data-persistence improvements.
+- Reviewed database requirements.
+- Assisted with relevant backend tasks.
+- Checked data consistency.
+
+**Divya Joshi**
+- Supported functional module development.
+- Reviewed module interactions.
+- Assisted with integration.
+- Checked supported workflows.
+
+**Anishka Sharma**
+- Verified updated functionality.
+- Recorded defects and observations.
+- Supported regression checks.
+- Updated project documentation.
+
+### Expected Outcome
+Progress on functional refinements and integration of supported features.
+
+---
+
+## Week 8: 24 August – 30 August 2026
+
+### Focus
+Academic planning and timetable workflows.
+
+### Team Contributions
+
+**Afroj Ali**
+- Coordinated academic-planning work.
+- Reviewed application integration.
+- Supported backend workflow implementation.
+- Reviewed the overall user flow.
+
+**Harshini Choudhary**
+- Reviewed timetable and planning interfaces.
+- Supported page-layout improvements.
+- Checked visual consistency.
+- Helped improve interface usability.
+
+**Ayush Saini**
+- Supported persistence for relevant modules.
+- Reviewed database requirements.
+- Assisted with database integration.
+- Checked data-related workflows.
+
+**Divya Joshi**
+- Supported functional workflow development.
+- Reviewed module integration.
+- Assisted with academic-planning functionality.
+- Checked interactions between relevant components.
+
+**Anishka Sharma**
+- Prepared timetable-related verification scenarios.
+- Reviewed planning workflows.
+- Recorded issues.
+- Updated documentation.
+
+### Expected Outcome
+Progress on academic-planning and timetable-related workflows.
+
+---
+
+## Week 9: 31 August – 6 September 2026
+
+### Focus
+Learning resources and campus modules.
+
+### Team Contributions
+
+**Afroj Ali**
+- Reviewed integration of available campus modules.
+- Coordinated application improvements.
+- Supported backend integration.
+- Reviewed overall module consistency.
+
+**Harshini Choudhary**
+- Reviewed resource-related page layouts.
+- Supported interface improvements.
+- Checked frontend consistency.
+- Helped improve navigation.
+
+**Ayush Saini**
+- Supported data storage for available modules.
+- Reviewed relevant database requirements.
+- Assisted with persistence issues.
+- Supported backend integration.
+
+**Divya Joshi**
+- Supported functional module development.
+- Reviewed integration between modules.
+- Assisted with workflow verification.
+- Coordinated functional requirements.
+
+**Anishka Sharma**
+- Prepared test scenarios for available resources.
+- Reviewed relevant application workflows.
+- Documented identified issues.
+- Updated project documentation.
+
+### Expected Outcome
+Progress on supported campus and learning-resource modules.
+
+---
+
+## Week 10: 7 September – 13 September 2026
+
+### Focus
+Faculty features and application improvements.
+
+### Team Contributions
+
+**Afroj Ali**
+- Reviewed role-based application workflows.
+- Supported backend integration.
+- Coordinated feature improvements.
+- Reviewed application behavior.
+
+**Harshini Choudhary**
+- Reviewed interface consistency across user roles.
+- Supported frontend improvements.
+- Checked page layouts.
+- Assisted with usability refinements.
+
+**Ayush Saini**
+- Supported database integration.
+- Reviewed persistence requirements.
+- Assisted with data-related issues.
+- Checked relevant backend workflows.
+
+**Divya Joshi**
+- Supported faculty and academic module integration.
+- Reviewed functional requirements.
+- Assisted with workflow improvements.
+- Helped verify module interactions.
+
+**Anishka Sharma**
+- Prepared role-based test scenarios.
+- Reviewed access restrictions.
+- Recorded testing observations.
+- Updated documentation.
+
+### Expected Outcome
+Progress on faculty-related functionality and role-based application workflows.
+
+---
+
+## Week 11: 14 September – 20 September 2026
+
+### Focus
+Testing, security review, and bug fixing.
+
+### Team Contributions
+
+**Afroj Ali**
+- Coordinated application review.
+- Supported final integration checks.
+- Reviewed identified defects.
+- Coordinated required fixes.
+
+**Harshini Choudhary**
+- Reviewed frontend behavior.
+- Checked interface consistency.
+- Supported correction of identified UI issues.
+- Reviewed usability.
+
+**Ayush Saini**
+- Verified database behavior.
+- Reviewed data persistence.
+- Investigated database-related defects.
+- Supported backend verification.
+
+**Divya Joshi**
+- Supported functional testing.
+- Reviewed module interactions.
+- Assisted with integration issue resolution.
+- Verified relevant workflows.
+
+**Anishka Sharma**
+- Supported regression testing.
+- Recorded and tracked issues.
+- Reviewed application behavior.
+- Updated quality-assurance documentation.
+
+### Expected Outcome
+Improved application verification and resolution of identified issues.
+
+---
+
+## Week 12: 21 September – 27 September 2026
+
+### Focus
+Final verification, deployment, and documentation.
+
+### Team Contributions
+
+**Afroj Ali**
+- Coordinated final application review.
+- Reviewed backend and frontend integration.
+- Supported deployment activities.
+- Coordinated project completion tasks.
+
+**Harshini Choudhary**
+- Reviewed the final user interface.
+- Checked frontend consistency.
+- Supported final layout refinements.
+- Verified the presentation of available pages.
+
+**Ayush Saini**
+- Reviewed database configuration.
+- Verified relevant persistence workflows.
+- Supported database connectivity checks.
+- Assisted with final backend verification.
+
+**Divya Joshi**
+- Reviewed functional module integration.
+- Supported final workflow verification.
+- Checked interactions between application components.
+- Assisted with final functional review.
+
+**Anishka Sharma**
+- Prepared final project documentation.
+- Supported testing summaries.
+- Reviewed documentation consistency.
+- Assisted with quality-assurance records.
+
+### Expected Outcome
+Final review of available functionality, deployment readiness, and project documentation.
+
+---
+
+## 📌 Weekly Contribution Verification
+
+The weekly contribution sections provide a documentation structure for recording team activity.
+
+For an accurate project record, each contribution should be verified against one or more of the following:
+
+- College project portal entries.
+- GitHub commits and pull requests.
+- Team work logs.
+- Screenshots of completed features.
+- Testing records.
+- Project reports and documentation.
+- Actual implementation in the source code.
+
+Do not claim that a feature or task was completed unless the available evidence supports that claim.
 
 ---
 
 ## ⚠️ Limitations
 
-The application's actual capabilities depend on the current implementation and deployment configuration.
+The actual capabilities of Campus Mate depend on the current implementation.
 
-Potential limitations to verify include:
+Potential limitations include:
 
 - Some modules may have limited functionality.
-- Application performance depends on hosting resources and database connectivity.
+- Performance depends on hosting resources and database connectivity.
 - A free hosting instance may take additional time to respond after inactivity.
-- Some advanced features may require future development.
-- Test coverage and production-readiness have not been established by this README alone.
+- Some advanced features may require further development.
+- Testing coverage and production-readiness require separate verification.
 
 ---
 
 ## 🔮 Future Scope
 
-Possible future improvements include:
+Campus Mate can potentially be improved through the following enhancements:
 
-- More advanced academic planning tools.
+- Advanced academic planning tools.
 - Email or in-app notifications.
-- Attendance integration.
-- Enhanced analytics and reporting.
-- Additional faculty-student collaboration features.
-- Improved mobile responsiveness.
+- Attendance management integration.
+- Additional reporting and analytics.
+- Improved faculty-student collaboration.
+- Better mobile responsiveness.
 - Accessibility improvements.
-- More comprehensive automated testing.
-- Expanded academic resource management.
+- Expanded automated testing.
+- Additional academic-resource management capabilities.
+- Enhanced application monitoring.
 
-These are possible future enhancements, not claims that the features already exist.
+These are potential improvements and should not be represented as currently implemented features.
 
 ---
 
@@ -670,16 +1249,18 @@ These are possible future enhancements, not claims that the features already exi
 
 Campus Mate aims to provide a centralized digital platform for college information and student assistance.
 
-By bringing supported campus information and academic tools into one web application, the project seeks to improve accessibility, organization, and usability for students, faculty, and administrators.
+The project brings together supported campus information and academic workflows in a web application designed for students, faculty members, and administrators.
 
-The project demonstrates the use of Java, Spring Boot, Thymeleaf, MySQL, and related web technologies to build a role-based academic application.
+Using Java, Spring Boot, Thymeleaf, MySQL, and related technologies, the project demonstrates the practical application of web development, database management, role-based access, software testing, teamwork, and deployment.
 
-The repository and live demonstration are available below.
+The application and source code can be accessed through the following links.
 
-**Live Demo:**  
+### 🌐 Live Demo
+
 https://campus-mate-project.onrender.com
 
-**GitHub Repository:**  
+### 💻 GitHub Repository
+
 https://github.com/Afroj881/campus-mate-project
 
 ---
@@ -688,4 +1269,10 @@ https://github.com/Afroj881/campus-mate-project
 
 We would like to thank Arya College of Engineering & IT, our faculty members, and everyone who provided guidance and feedback during the development of Campus Mate.
 
-This project has provided an opportunity to apply software development concepts, database management, web application architecture, teamwork, testing, and deployment practices in an academic setting.
+This project has provided an opportunity to apply software engineering concepts, database management, web application development, testing, documentation, teamwork, and deployment practices in an academic setting.
+
+---
+
+<p align="center">
+  <b>Campus Mate — Bringing College Information Together.</b>
+</p>
