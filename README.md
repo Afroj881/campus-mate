@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://campus-mate-project.onrender.com">🌐 Live Demo</a> •
-  <a href="https://github.com/Afroj881/campus-mate-project">💻 GitHub Repository</a>
+  <a href="https://github.com/Afroj881/campus-mate">💻 GitHub Repository</a>
 </p>
 
 ---
