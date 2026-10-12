@@ -385,7 +385,7 @@ Install the following tools:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Afroj881/campus-mate-project.git
+git clone https://github.com/Afroj881/campus-mate
 ```
 
 ### Step 2: Open the Project Directory
