@@ -7,7 +7,8 @@
 
 <p align="center">
   <a href="https://campus-mate-project.onrender.com">🌐 Live Demo</a> •
-  <a href="https://github.com/Afroj881/campus-mate">💻 GitHub Repository</a>
+  <a href="https://github.com/Afroj881/campus-mate">💻 GitHub Repository</a> •
+  <a href="https://drive.google.com/drive/folders/13_0Ae7XgeCPSwAuirw4HJ6i2rgr8gPwe?usp=drive_link">📁 Documents & Demo Video</a>
 </p>
 
 ---
