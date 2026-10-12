@@ -574,7 +574,7 @@ Campus Mate's source code is maintained on GitHub, and the deployed application 
 | Resource | Link |
 |---|---|
 | Live Application | https://campus-mate-project.onrender.com |
-| GitHub Repository | https://github.com/Afroj881/campus-mate-project |
+| GitHub Repository | https://github.com/Afroj881/campus-mate |
 
 ### Deployment Architecture
 
@@ -1261,7 +1261,7 @@ https://campus-mate-project.onrender.com
 
 ### 💻 GitHub Repository
 
-https://github.com/Afroj881/campus-mate-project
+https://github.com/Afroj881/campus-mate
 
 ---
 
